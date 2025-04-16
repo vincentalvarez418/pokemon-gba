@@ -45,7 +45,7 @@ const BattleRoom = () => {
     }
   };
 
-  // Check if both players are ready and redirect
+
   useEffect(() => {
     if (readyStatus.leader && readyStatus.challenger) {
       navigate(`/pokemon-selection/${battleId}`, { state: { role } });

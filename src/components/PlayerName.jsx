@@ -11,10 +11,8 @@ const PlayerName = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-
     const savedPlayerId = localStorage.getItem("playerId");
     if (!savedPlayerId) {
-      
       const newPlayerId = uuidv4();
       localStorage.setItem("playerId", newPlayerId);
       setPlayerId(newPlayerId);
@@ -30,8 +28,6 @@ const PlayerName = () => {
         const response = await fetch(`${apiUrl}/players`);
         if (!response.ok) throw new Error("Failed to fetch players");
         const players = await response.json();
-
-
         const existingPlayer = players.find(player => player.id === playerId);
 
         if (existingPlayer) {
@@ -59,10 +55,8 @@ const PlayerName = () => {
         if (!response.ok) throw new Error("Failed to fetch players");
 
         const players = await response.json();
-
         const existingPlayer = players.find(player => player.name === name);
 
-       
         if (existingPlayer) {
           setOpenDialog(true);
           return;
