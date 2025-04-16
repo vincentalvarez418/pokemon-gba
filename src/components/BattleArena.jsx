@@ -19,7 +19,7 @@ const BattleArena = () => {
   const [opponentNickname, setOpponentNickname] = useState("");
   const [playerScore, setPlayerScore] = useState(0);
   const [opponentScore, setOpponentScore] = useState(0);
-  const [battleComplete, setBattleComplete] = useState(false);  // Track if battle is complete
+  const [battleComplete, setBattleComplete] = useState(false);  
 
   const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
@@ -59,12 +59,11 @@ const BattleArena = () => {
 
     fetchReadinessData();
 
-    // Interval to auto-refresh data in case the opponent joins later
     const interval = setInterval(() => {
       fetchReadinessData();
-    }, 5000); // Check every 5 seconds for updates
+    }, 5000); 
 
-    return () => clearInterval(interval); // Cleanup the interval on unmount
+    return () => clearInterval(interval);
   }, [battleId, role]);
 
   const simulateBattle = async (attacker, defender) => {

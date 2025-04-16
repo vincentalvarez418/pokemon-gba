@@ -5,32 +5,8 @@
       "name": "was"
     },
     {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asd"
-    },
-    {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "hero"
-    },
-    {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asds"
-    },
-    {
       "id": "6642bcf4-7697-4fb7-be56-3fd87748d887",
-      "name": "wasas"
-    },
-    {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asda"
-    },
-    {
-      "id": "6642bcf4-7697-4fb7-be56-3fd87748d887",
-      "name": "waas"
-    },
-    {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asdw"
+      "name": "wise"
     }
   ],
   "team": [
@@ -584,182 +560,182 @@
       ]
     }
   ],
-    "battleResults": [
-      {
-        "id": "eec7",
-        "battleId": "battle-abc123",
-        "attacker": "wartortle",
-        "defender": "bulbasaur",
-        "attackerTrainer": "Marvin",
-        "defenderTrainer": "Gaye",
-        "winnerPokemon": "wartortle",
-        "winnerTrainer": "Marvin",
-        "timestamp": "2025-04-16T15:39:33.946Z"
-      },
-      {
-        "id": "64f2",
-        "battleId": "battle-abc123",
-        "attacker": "wartortle",
-        "defender": "charmander",
-        "attackerTrainer": "Marvin",
-        "defenderTrainer": "Gaye",
-        "winnerPokemon": "wartortle",
-        "winnerTrainer": "Marvin",
-        "timestamp": "2025-04-16T15:39:33.958Z"
-      },
-      {
-        "id": "7a26",
-        "battleId": "battle-xyz789",
-        "attacker": "wartortle",
-        "defender": "blastoise",
-        "attackerTrainer": "Marvin",
-        "defenderTrainer": "Gaye",
-        "winnerPokemon": "blastoise",
-        "winnerTrainer": "Gaye",
-        "timestamp": "2025-04-16T15:39:33.969Z"
-      },
-      {
-        "id": "358a",
-        "battleId": "battle-xyz789",
-        "attacker": "nidorina",
-        "defender": "blastoise",
-        "attackerTrainer": "Marvin",
-        "defenderTrainer": "Gaye",
-        "winnerPokemon": "blastoise",
-        "winnerTrainer": "Gaye",
-        "timestamp": "2025-04-16T15:39:33.981Z"
-      },
-      {
-        "id": "278c",
-        "battleId": "battle-pqr456",
-        "attacker": "pidgeot",
-        "defender": "blastoise",
-        "attackerTrainer": "Marvin",
-        "defenderTrainer": "Gaye",
-        "winnerPokemon": "pidgeot",
-        "winnerTrainer": "Marvin",
-        "timestamp": "2025-04-16T15:39:33.992Z"
-      },
-      {
-        "id": "4620",
-        "battleId": "battle-pqr456",
-        "attacker": "pidgeot",
-        "defender": "hitmonchan",
-        "attackerTrainer": "Marvin",
-        "defenderTrainer": "Gaye",
-        "winnerPokemon": "pidgeot",
-        "winnerTrainer": "Marvin",
-        "timestamp": "2025-04-16T15:39:34.007Z"
-      },
-      {
-        "id": "3ba0",
-        "battleId": "battle-stu234",
-        "attacker": "pidgeot",
-        "defender": "porygon",
-        "attackerTrainer": "Marvin",
-        "defenderTrainer": "Gaye",
-        "winnerPokemon": "pidgeot",
-        "winnerTrainer": "Marvin",
-        "timestamp": "2025-04-16T15:39:34.022Z"
-      },
-      {
-        "id": "03b5",
-        "battleId": "battle-stu234",
-        "attacker": "pidgeot",
-        "defender": "goldeen",
-        "attackerTrainer": "Marvin",
-        "defenderTrainer": "Gaye",
-        "winnerPokemon": "pidgeot",
-        "winnerTrainer": "Marvin",
-        "timestamp": "2025-04-16T15:39:34.031Z"
-      },
-      {
-        "id": "2f82",
-        "battleId": "battle-lmn567",
-        "attacker": "bulbasaur",
-        "defender": "wartortle",
-        "attackerTrainer": "Michael",
-        "defenderTrainer": "Smith",
-        "winnerPokemon": "wartortle",
-        "winnerTrainer": "Smith",
-        "timestamp": "2025-04-16T15:50:04.523Z"
-      },
-      {
-        "id": "e7c0",
-        "battleId": "battle-lmn567",
-        "attacker": "charmander",
-        "defender": "wartortle",
-        "attackerTrainer": "Michael",
-        "defenderTrainer": "Smith",
-        "winnerPokemon": "wartortle",
-        "winnerTrainer": "Smith",
-        "timestamp": "2025-04-16T15:50:04.603Z"
-      },
-      {
-        "id": "8010",
-        "battleId": "battle-tuv890",
-        "attacker": "blastoise",
-        "defender": "wartortle",
-        "attackerTrainer": "Michael",
-        "defenderTrainer": "Smith",
-        "winnerPokemon": "blastoise",
-        "winnerTrainer": "Michael",
-        "timestamp": "2025-04-16T15:50:04.673Z"
-      },
-      {
-        "id": "c950",
-        "battleId": "battle-tuv890",
-        "attacker": "blastoise",
-        "defender": "nidorina",
-        "attackerTrainer": "Michael",
-        "defenderTrainer": "Smith",
-        "winnerPokemon": "blastoise",
-        "winnerTrainer": "Michael",
-        "timestamp": "2025-04-16T15:50:04.744Z"
-      },
-      {
-        "id": "a79c",
-        "battleId": "battle-wxy123",
-        "attacker": "blastoise",
-        "defender": "pidgeot",
-        "attackerTrainer": "Michael",
-        "defenderTrainer": "Smith",
-        "winnerPokemon": "pidgeot",
-        "winnerTrainer": "Smith",
-        "timestamp": "2025-04-16T15:50:04.819Z"
-      },
-      {
-        "id": "f11e",
-        "battleId": "battle-wxy123",
-        "attacker": "hitmonchan",
-        "defender": "pidgeot",
-        "attackerTrainer": "Michael",
-        "defenderTrainer": "Smith",
-        "winnerPokemon": "pidgeot",
-        "winnerTrainer": "Smith",
-        "timestamp": "2025-04-16T15:50:04.887Z"
-      },
-      {
-        "id": "999d",
-        "battleId": "battle-zab456",
-        "attacker": "porygon",
-        "defender": "pidgeot",
-        "attackerTrainer": "Michael",
-        "defenderTrainer": "Smith",
-        "winnerPokemon": "pidgeot",
-        "winnerTrainer": "Smith",
-        "timestamp": "2025-04-16T15:50:04.962Z"
-      },
-      {
-        "id": "e0fc",
-        "battleId": "battle-zab456",
-        "attacker": "goldeen",
-        "defender": "pidgeot",
-        "attackerTrainer": "Michael",
-        "defenderTrainer": "Smith",
-        "winnerPokemon": "pidgeot",
-        "winnerTrainer": "Smith",
-        "timestamp": "2025-04-16T15:50:05.031Z"
-      }
-    ]
-  }
+  "battleResults": [
+    {
+      "id": "eec7",
+      "battleId": "battle-abc123",
+      "attacker": "wartortle",
+      "defender": "bulbasaur",
+      "attackerTrainer": "Marvin",
+      "defenderTrainer": "Gaye",
+      "winnerPokemon": "wartortle",
+      "winnerTrainer": "Marvin",
+      "timestamp": "2025-04-16T15:39:33.946Z"
+    },
+    {
+      "id": "64f2",
+      "battleId": "battle-abc123",
+      "attacker": "wartortle",
+      "defender": "charmander",
+      "attackerTrainer": "Marvin",
+      "defenderTrainer": "Gaye",
+      "winnerPokemon": "wartortle",
+      "winnerTrainer": "Marvin",
+      "timestamp": "2025-04-16T15:39:33.958Z"
+    },
+    {
+      "id": "7a26",
+      "battleId": "battle-xyz789",
+      "attacker": "wartortle",
+      "defender": "blastoise",
+      "attackerTrainer": "Marvin",
+      "defenderTrainer": "Gaye",
+      "winnerPokemon": "blastoise",
+      "winnerTrainer": "Gaye",
+      "timestamp": "2025-04-16T15:39:33.969Z"
+    },
+    {
+      "id": "358a",
+      "battleId": "battle-xyz789",
+      "attacker": "nidorina",
+      "defender": "blastoise",
+      "attackerTrainer": "Marvin",
+      "defenderTrainer": "Gaye",
+      "winnerPokemon": "blastoise",
+      "winnerTrainer": "Gaye",
+      "timestamp": "2025-04-16T15:39:33.981Z"
+    },
+    {
+      "id": "278c",
+      "battleId": "battle-pqr456",
+      "attacker": "pidgeot",
+      "defender": "blastoise",
+      "attackerTrainer": "Marvin",
+      "defenderTrainer": "Gaye",
+      "winnerPokemon": "pidgeot",
+      "winnerTrainer": "Marvin",
+      "timestamp": "2025-04-16T15:39:33.992Z"
+    },
+    {
+      "id": "4620",
+      "battleId": "battle-pqr456",
+      "attacker": "pidgeot",
+      "defender": "hitmonchan",
+      "attackerTrainer": "Marvin",
+      "defenderTrainer": "Gaye",
+      "winnerPokemon": "pidgeot",
+      "winnerTrainer": "Marvin",
+      "timestamp": "2025-04-16T15:39:34.007Z"
+    },
+    {
+      "id": "3ba0",
+      "battleId": "battle-stu234",
+      "attacker": "pidgeot",
+      "defender": "porygon",
+      "attackerTrainer": "Marvin",
+      "defenderTrainer": "Gaye",
+      "winnerPokemon": "pidgeot",
+      "winnerTrainer": "Marvin",
+      "timestamp": "2025-04-16T15:39:34.022Z"
+    },
+    {
+      "id": "03b5",
+      "battleId": "battle-stu234",
+      "attacker": "pidgeot",
+      "defender": "goldeen",
+      "attackerTrainer": "Marvin",
+      "defenderTrainer": "Gaye",
+      "winnerPokemon": "pidgeot",
+      "winnerTrainer": "Marvin",
+      "timestamp": "2025-04-16T15:39:34.031Z"
+    },
+    {
+      "id": "2f82",
+      "battleId": "battle-lmn567",
+      "attacker": "bulbasaur",
+      "defender": "wartortle",
+      "attackerTrainer": "Michael",
+      "defenderTrainer": "Smith",
+      "winnerPokemon": "wartortle",
+      "winnerTrainer": "Smith",
+      "timestamp": "2025-04-16T15:50:04.523Z"
+    },
+    {
+      "id": "e7c0",
+      "battleId": "battle-lmn567",
+      "attacker": "charmander",
+      "defender": "wartortle",
+      "attackerTrainer": "Michael",
+      "defenderTrainer": "Smith",
+      "winnerPokemon": "wartortle",
+      "winnerTrainer": "Smith",
+      "timestamp": "2025-04-16T15:50:04.603Z"
+    },
+    {
+      "id": "8010",
+      "battleId": "battle-tuv890",
+      "attacker": "blastoise",
+      "defender": "wartortle",
+      "attackerTrainer": "Michael",
+      "defenderTrainer": "Smith",
+      "winnerPokemon": "blastoise",
+      "winnerTrainer": "Michael",
+      "timestamp": "2025-04-16T15:50:04.673Z"
+    },
+    {
+      "id": "c950",
+      "battleId": "battle-tuv890",
+      "attacker": "blastoise",
+      "defender": "nidorina",
+      "attackerTrainer": "Michael",
+      "defenderTrainer": "Smith",
+      "winnerPokemon": "blastoise",
+      "winnerTrainer": "Michael",
+      "timestamp": "2025-04-16T15:50:04.744Z"
+    },
+    {
+      "id": "a79c",
+      "battleId": "battle-wxy123",
+      "attacker": "blastoise",
+      "defender": "pidgeot",
+      "attackerTrainer": "Michael",
+      "defenderTrainer": "Smith",
+      "winnerPokemon": "pidgeot",
+      "winnerTrainer": "Smith",
+      "timestamp": "2025-04-16T15:50:04.819Z"
+    },
+    {
+      "id": "f11e",
+      "battleId": "battle-wxy123",
+      "attacker": "hitmonchan",
+      "defender": "pidgeot",
+      "attackerTrainer": "Michael",
+      "defenderTrainer": "Smith",
+      "winnerPokemon": "pidgeot",
+      "winnerTrainer": "Smith",
+      "timestamp": "2025-04-16T15:50:04.887Z"
+    },
+    {
+      "id": "999d",
+      "battleId": "battle-zab456",
+      "attacker": "porygon",
+      "defender": "pidgeot",
+      "attackerTrainer": "Michael",
+      "defenderTrainer": "Smith",
+      "winnerPokemon": "pidgeot",
+      "winnerTrainer": "Smith",
+      "timestamp": "2025-04-16T15:50:04.962Z"
+    },
+    {
+      "id": "e0fc",
+      "battleId": "battle-zab456",
+      "attacker": "goldeen",
+      "defender": "pidgeot",
+      "attackerTrainer": "Michael",
+      "defenderTrainer": "Smith",
+      "winnerPokemon": "pidgeot",
+      "winnerTrainer": "Smith",
+      "timestamp": "2025-04-16T15:50:05.031Z"
+    }
+  ]
+}
