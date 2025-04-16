@@ -1,0 +1,147 @@
+.team-solo-battle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .team-solo-pokemon-battle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    padding: 0 20px;
+  }
+  
+  .team-solo-pokemon-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 42%;
+  }
+  
+  .team-solo-pokemon-side img {
+    image-rendering: pixelated;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+    transition: transform 0.5s ease;
+  }
+  
+  .team-solo-pokemon-side h3 {
+    margin: 10px 0;
+  }
+  
+  .team-solo-pokemon-side h4 {
+    margin: 5px 0;
+    text-transform: capitalize;
+  }
+  
+  .team-solo-pokemon-side p {
+    margin: 2px 0;
+    text-align: left;
+  }
+  
+  .team-solo-vs-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #156103;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0 4px;
+  }
+  
+  .team-solo-battle-result {
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #156103;
+  }
+  
+  @keyframes slide-in-left {
+    from { transform: translateX(-100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes slide-in-right {
+    from { transform: translateX(100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes attack {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes hit {
+    0% {
+        filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+    }
+    50% {
+        filter: brightness(2) grayscale(100%) contrast(100%) sepia(100%) hue-rotate(120deg);
+    }
+    100% {
+        filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+    }
+}
+  
+  @keyframes bounce {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .team-solo-pokemon-side img.attack {
+    animation: attack 0.5s ease-in-out;
+  }
+  
+  .team-solo-pokemon-side img.hit {
+    animation: hit 0.5s ease-in-out;
+  }
+  
+  .team-solo-pokemon-side img.bounce {
+    animation: bounce 0.5s ease-in-out;
+  }
+  
+  .return-button {
+    background-color: #a4d9a4;
+    color: #000;
+    padding: 12px 24px;
+    font-size: 10px;
+    font-family: 'Press Start 2P', cursive;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    top: 50px;
+    text-transform: uppercase;
+  }
+  
+  .press-b-text {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+    color: #156103;
+  }
+  
+  .press-b {
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  

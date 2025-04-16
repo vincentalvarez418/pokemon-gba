@@ -1,0 +1,23 @@
+body {
+    background-image: url('./assets/BG.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  body::-webkit-scrollbar,
+  html::-webkit-scrollbar {
+    display: none;
+  }
+  

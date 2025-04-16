@@ -1,0 +1,35 @@
+.qr-join-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color: #00ff99; 
+  background-color: #000;
+  border: 2px solid #00ff99;
+  border-radius: 16px;
+  box-shadow: 0 0 12px #00ff99;
+}
+
+.qr-reader-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  margin-top: 1rem;
+  overflow: hidden;
+  border: 2px solid #00ff99;
+  border-radius: 8px;
+  background: #111;
+}
+
+.qr-reader-container video {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.qr-join-container p {
+  font-family: monospace;
+  font-size: 1rem;
+}
