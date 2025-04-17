@@ -1,6 +1,6 @@
 .bulbasaur-gif {
     position: fixed;
-    bottom: 25px;
+    bottom: -5px;
     left: -150px;
     width: 200px;
     z-index: -1;
@@ -9,7 +9,7 @@
   
   .pikachu-gif {
     position: fixed;
-    bottom: 10px;
+    bottom: -20px;
     left: -150px;
     width: 230px;
     z-index: -1;
@@ -72,3 +72,71 @@
     }
   }
   
+  @media (max-width: 767px) {
+    .bulbasaur-gif {
+        bottom: -30px;
+        left: -150px;
+        width: 150px;
+    }
+
+    .pikachu-gif {
+        bottom: 710px;
+        left: -150px;
+        width: 180px;
+        z-index: -1;
+    }
+
+    .bird-gif {
+        top: 30px;
+        left: -150px;
+        width: 180px;
+    }
+
+    .bird-one {
+        animation: birdOneFlyAcross 12s linear infinite;
+    }
+
+    .bird-two {
+        animation: birdTwoFlyAcross 8s linear infinite;
+    }
+}
+
+@media (min-width: 768px) {
+    .bulbasaur-gif {
+        bottom: 215px;
+        left: -150px;
+        width: 200px;
+    }
+
+    .pikachu-gif {
+        bottom: 205px;
+        left: -150px;
+        width: 230px;
+    }
+
+    .bird-gif {
+        top: 40px;
+        left: -150px;
+        width: 220px;
+    }
+}
+
+@media (min-width: 1080px) {
+    .bulbasaur-gif {
+        bottom: -5px;
+        left: -150px;
+        width: 200px;
+    }
+
+    .pikachu-gif {
+        bottom: -20px;
+        left: -150px;
+        width: 230px;
+    }
+
+    .bird-gif {
+        top: 40px;
+        left: -150px;
+        width: 220px;
+    }
+}

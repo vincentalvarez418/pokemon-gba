@@ -21,4 +21,9 @@ body {
   html::-webkit-scrollbar {
     display: none;
   }
-  
+
+  @media (max-width: 767px) {
+    body {
+      overflow: hidden;
+    }
+  }
