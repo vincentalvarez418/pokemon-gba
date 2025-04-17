@@ -31,28 +31,20 @@
     {
       "id": "3339e093-bb13-41fc-852c-14089f51fc3b",
       "name": "sd"
+    },
+    {
+      "id": "fe218d9d-abe0-4885-81d4-edb0386165b7",
+      "name": "asd"
     }
   ],
   "team": [
     {
       "id": "1",
       "team": [
-        {
-          "name": "bulbasaur",
-          "url": "https://pokeapi.co/api/v2/pokemon/1/"
-        },
-        {
-          "name": "mewtwo",
-          "url": "https://pokeapi.co/api/v2/pokemon/150/"
-        },
-        {
-          "name": "kakuna",
-          "url": "https://pokeapi.co/api/v2/pokemon/14/"
-        },
-        {
-          "name": "pidgey",
-          "url": "https://pokeapi.co/api/v2/pokemon/16/"
-        },
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ]
