@@ -17,20 +17,25 @@ const QRHistory = () => {
 
         const grouped = data.reduce((acc, result) => {
           const { battleId, winnerTrainer, attackerTrainer, defenderTrainer } = result;
-
-          if (!acc[battleId]) {
-            acc[battleId] = {
+        
+          // Generate a unique key combining battleId and trainers
+          const uniqueKey = `${battleId}_${attackerTrainer}_${defenderTrainer}`;
+        
+          if (!acc[uniqueKey]) {
+            acc[uniqueKey] = {
+              battleId,
               trainers: new Set([attackerTrainer, defenderTrainer]),
               scores: {},
             };
           }
-
-          acc[battleId].scores[winnerTrainer] = (acc[battleId].scores[winnerTrainer] || 0) + 1;
-
+        
+          acc[uniqueKey].scores[winnerTrainer] = (acc[uniqueKey].scores[winnerTrainer] || 0) + 1;
+        
           return acc;
         }, {});
+        
 
-        const formattedResults = Object.entries(grouped).map(([battleId, { trainers, scores }]) => {
+        const formattedResults = Object.entries(grouped).map(([uniqueKey, { battleId, trainers, scores }]) => {
           const trainerArray = Array.from(trainers);
           return {
             battleId,
@@ -40,6 +45,7 @@ const QRHistory = () => {
             score2: scores[trainerArray[1]] || 0,
           };
         });
+        
 
         setGroupedResults(formattedResults);
         setLoading(false);

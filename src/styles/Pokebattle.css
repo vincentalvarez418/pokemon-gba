@@ -20,6 +20,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation-duration: 4s;
     width: 42%;
   }
   
@@ -81,18 +82,93 @@
     50% { transform: translateX(20px); }
     100% { transform: translateX(0); }
   }
+
+@keyframes attackPlayer {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes attackOpponent {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+.player-attack {
+  animation: attackPlayer 0.5s ease-in-out;
+}
+
+.opponent-attack {
+  animation: attackOpponent 0.5s ease-in-out;
+}
+
+@keyframes hit {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(2);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+.hit {
+  animation: hit 0.5s ease-in-out;
+}
+
+  
   
   @keyframes hit {
     0% {
-        filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+      filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+      transform: scale(1);
+    }
+    25% {
+      filter: brightness(2) grayscale(100%) contrast(100%) sepia(100%) hue-rotate(120deg);
+      transform: scale(1.1);
     }
     50% {
-        filter: brightness(2) grayscale(100%) contrast(100%) sepia(100%) hue-rotate(120deg);
+      filter: brightness(2) grayscale(100%) contrast(100%) sepia(100%) hue-rotate(120deg);
+      transform: scale(0.9);
+    }
+    75% {
+      filter: brightness(2) grayscale(100%) contrast(100%) sepia(100%) hue-rotate(120deg);
+      transform: scale(1.05);
     }
     100% {
-        filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+      filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+      transform: scale(1);
     }
-}
+  }
+  
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .team-solo-pokemon-side img.hit {
+    animation: hit 0.5s ease-in-out, shake 0.5s ease-in-out;
+  }
+  
   
   @keyframes bounce {
     0% { transform: translateX(0); }

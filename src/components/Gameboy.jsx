@@ -1,18 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import BattleLogicModal from "./BattleLogicModal";
 import "./../styles/Gameboy.css";
 
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 const Gameboy = () => {
   const location = useLocation();
   const [tiltEffect, setTiltEffect] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isReturnTextVisible, setIsReturnTextVisible] = useState(false);
+  const [canPressB, setCanPressB] = useState(true);
+  const [refreshBattleView, setRefreshBattleView] = useState(false); // Add state to trigger refresh
   const navigate = useNavigate();
 
   const isHome = location.pathname === "/";
 
-  const handleButtonClick = (direction) => {
+  useEffect(() => {
+    if (location.pathname === "/pokebattle") {
+      setIsReturnTextVisible(true);
+      const timer = setTimeout(() => {
+        setCanPressB(true);
+      }, 9000);
+
+      setCanPressB(false);
+      return () => clearTimeout(timer);
+    } else {
+      setIsReturnTextVisible(false);
+      setCanPressB(true);
+    }
+  }, [location.pathname]);
+
+  const handleButtonClick = async (direction) => {
     switch (direction) {
       case "left":
         setTiltEffect("tilt-left");
@@ -28,40 +48,65 @@ const Gameboy = () => {
         break;
       case "a":
         setTiltEffect("spin");
-        break;
-      case "b":
         if (location.pathname === "/battle") {
-          navigate("/solo-battle");
-        } else if (location.pathname === "/pokebattle") {
-          navigate("/battle");
-        } else if (location.pathname === "/solo-battle") {
-          navigate("/lobby");
-        } else if (location.pathname === "/lobby") {
-          navigate("/");
-        } else if (location.pathname === "/battle-logs") {
-          navigate("/lobby");
-        } else if (location.pathname === "/qr-battle/host") {
-          navigate("/qr-battle");
-        } else if (location.pathname === "/qr-battle/join") {
-          navigate("/qr-battle");
-        } else if (location.pathname === "/qr-battle") {
-          navigate("/lobby");
-        } else if (location.pathname === "/qr-battle/history") {
-          navigate("/qr-battle");
-        } else if (
-          ["/playername", "/menu", "/pokedex"].includes(location.pathname)
-        ) {
-          navigate(-1);
+          try {
+            const response = await fetch(`${apiUrl}/faintslots`);
+            const faintslots = await response.json();
+
+            const deletePromises = faintslots.map((slot) =>
+              fetch(`${apiUrl}/faintslots/${slot.id}`, {
+                method: "DELETE",
+              })
+            );
+
+            await Promise.all(deletePromises);
+            console.log("Faint slots wiped successfully!");
+
+            // Trigger refresh in BattleView component after 1 second
+            setTimeout(() => {
+              setRefreshBattleView((prev) => !prev); // Toggle the state to trigger refresh
+              setTiltEffect(""); // Reset tilt effect (remove spin)
+            }, 1000); // Wait 1 second before triggering the refresh
+          } catch (error) {
+            console.error("Error wiping faint slots:", error);
+          }
+        }
+        break;
+
+      case "b":
+        if (canPressB) {
+          if (location.pathname === "/battle") {
+            navigate("/solo-battle");
+          } else if (location.pathname === "/pokebattle") {
+            navigate("/battle");
+          } else if (location.pathname === "/solo-battle") {
+            navigate("/lobby");
+          } else if (location.pathname === "/lobby") {
+            navigate("/");
+          } else if (location.pathname === "/battle-logs") {
+            navigate("/lobby");
+          } else if (location.pathname === "/qr-battle/host") {
+            navigate("/qr-battle");
+          } else if (location.pathname === "/qr-battle/join") {
+            navigate("/qr-battle");
+          } else if (location.pathname === "/qr-battle") {
+            navigate("/lobby");
+          } else if (location.pathname === "/qr-battle/history") {
+            navigate("/qr-battle");
+          } else if (
+            ["/playername", "/menu", "/pokedex"].includes(location.pathname)
+          ) {
+            navigate(-1);
+          }
         }
         break;
       default:
         setTiltEffect("");
         break;
     }
-  
+
     setTimeout(() => setTiltEffect(""), 500);
   };
-  
 
   const handleGrillLineClick = () => {
     setIsModalOpen(true);
@@ -72,6 +117,9 @@ const Gameboy = () => {
       <div className="gameboy-screen">
         <div className="screen-inner">
           {isHome ? <h1>Pokemon Retro Edition</h1> : <Outlet />}
+          {location.pathname === "/pokebattle" && isReturnTextVisible && (
+            <div className="return-text"></div>
+          )}
         </div>
       </div>
 
@@ -88,11 +136,7 @@ const Gameboy = () => {
       <div className="gameboy-label">Pokemon SIM Gen 1</div>
       <div className="speaker-grill">
         {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="grill-line"
-            onClick={handleGrillLineClick}
-          />
+          <div key={i} className="grill-line" onClick={handleGrillLineClick} />
         ))}
       </div>
 
@@ -115,7 +159,11 @@ const Gameboy = () => {
           <div className="button a" onClick={() => handleButtonClick("a")}>
             A
           </div>
-          <div className="button b" onClick={() => handleButtonClick("b")}>
+          <div
+            className="button b"
+            onClick={() => handleButtonClick("b")}
+            style={{ pointerEvents: canPressB ? "auto" : "none" }}
+          >
             B
           </div>
         </div>
