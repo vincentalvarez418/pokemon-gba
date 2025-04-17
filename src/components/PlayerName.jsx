@@ -45,23 +45,25 @@ const PlayerName = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (name.trim()) {
-      localStorage.setItem("playerName", name);
-
       try {
         const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
         const response = await fetch(`${apiUrl}/players`);
         if (!response.ok) throw new Error("Failed to fetch players");
-
+  
         const players = await response.json();
         const existingPlayer = players.find(player => player.name === name);
-
+  
         if (existingPlayer) {
-          setOpenDialog(true);
+          localStorage.setItem("playerId", existingPlayer.id);
+          localStorage.setItem("playerName", existingPlayer.name);
+          setPlayerId(existingPlayer.id);
+          setName(existingPlayer.name);
+          navigate("/menu");
           return;
         }
-
+  
         const createResponse = await fetch(`${apiUrl}/players`, {
           method: "POST",
           headers: {
@@ -69,17 +71,19 @@ const PlayerName = () => {
           },
           body: JSON.stringify({ id: playerId, name }),
         });
-
+  
         if (!createResponse.ok) {
           throw new Error("Failed to save player name in the database");
         }
-
+  
+        localStorage.setItem("playerName", name);
         navigate("/menu");
       } catch (error) {
         console.error("Error saving player entry:", error);
       }
     }
   };
+  
 
   return (
     <div className="player-name-screen">

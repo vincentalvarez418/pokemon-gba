@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/Pokebattle.css";
 
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+import battleTheme from "/battle.mp3";
+
 const Pokebattle = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,6 +23,12 @@ const Pokebattle = () => {
   const [isLogged, setIsLogged] = useState(false);
   const [loadingSprites, setLoadingSprites] = useState(true);
   const [battleStarted, setBattleStarted] = useState(false);
+  const hitClassPlayer = playerHit ? "hit" : "";
+  const hitClassOpponent = opponentHit ? "hit" : "";
+  const attackClassPlayer = playerAttacks ? "player-attack" : "";
+  const attackClassOpponent = opponentAttacks ? "opponent-attack" : "";
+
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
   useEffect(() => {
     const fetchPlayerDetails = async () => {
@@ -55,31 +64,78 @@ const Pokebattle = () => {
   useEffect(() => {
     if (playerDetails && opponentDetails && !loadingSprites && !battleStarted) {
       setBattleStarted(true);
-
-      setPlayerAttacks(true);
-      setOpponentHit(true);
-
+    
+      // Delay by 2.5 seconds before battle starts
       setTimeout(() => {
-        setPlayerAttacks(false);
-        setOpponentHit(false);
-      }, 800);
-
-      setTimeout(() => {
-        setOpponentAttacks(true);
-        setPlayerHit(true);
-      }, 1000);
-
-      setTimeout(() => {
-        setOpponentAttacks(false);
-        setPlayerHit(false);
-      }, 1800);
-
-      setTimeout(() => {
-        setShowResult(true);
-        determineWinner();
-      }, 2200);
+        // Player attack animations
+        setPlayerAttacks(true);
+        setOpponentHit(true);
+        setTimeout(() => {
+          setPlayerAttacks(false);
+          setOpponentHit(false);
+        }, 500);
+    
+        setTimeout(() => {
+          setPlayerAttacks(true);
+          setOpponentHit(true);
+        }, 1000);
+    
+        setTimeout(() => {
+          setPlayerAttacks(false);
+          setOpponentHit(false);
+        }, 1500);
+    
+        setTimeout(() => {
+          setPlayerAttacks(true);
+          setOpponentHit(true);
+        }, 2000);
+    
+        setTimeout(() => {
+          setPlayerAttacks(false);
+          setOpponentHit(false);
+        }, 2500);
+    
+        // Opponent attack animations
+        setTimeout(() => {
+          setOpponentAttacks(true);
+          setPlayerHit(true);
+        }, 3000);
+    
+        setTimeout(() => {
+          setOpponentAttacks(false);
+          setPlayerHit(false);
+        }, 3500);
+    
+        setTimeout(() => {
+          setOpponentAttacks(true);
+          setPlayerHit(true);
+        }, 4000);
+    
+        setTimeout(() => {
+          setOpponentAttacks(false);
+          setPlayerHit(false);
+        }, 4500);
+    
+        setTimeout(() => {
+          setOpponentAttacks(true);
+          setPlayerHit(true);
+        }, 5000);
+    
+        setTimeout(() => {
+          setOpponentAttacks(false);
+          setPlayerHit(false);
+        }, 5500);
+    
+        // Show result after attack animations
+        setTimeout(() => {
+          setShowResult(true);
+          determineWinner();
+        }, 6000);
+      }, 2500); // <- 2.5s delay before battle starts
     }
-  }, [playerDetails, opponentDetails, loadingSprites, battleStarted]);
+    
+}, [playerDetails, opponentDetails, loadingSprites, battleStarted]);
+
 
   const compareStats = (stat1, stat2) => {
     if (stat1 > stat2) return 1;
@@ -87,30 +143,57 @@ const Pokebattle = () => {
     return 0;
   };
 
-  const logToDatabase = async (winner, winnerPokemon, faintedPokemon) => {
+  const logToDatabase = async (winner, winnerPokemon, faintedPokemon, winnerSlot, faintedSlot) => {
     if (isLogged) return;
-
+  
     try {
-      await fetch("http://localhost:3000/temporarybattlelog", {
+      await fetch(`${apiUrl}/temporarybattlelog`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           winner,
           winnerPokemon,
           faintedPokemon,
+          winnerSlot,
+          faintedSlot,
           timestamp: new Date().toISOString(),
         }),
       });
-
+  
       setIsLogged(true);
     } catch (error) {
       console.error("Failed to log single battle result:", error);
     }
   };
 
+  const logFaintSlots = async (winnerSlot, faintedSlot) => {
+    if (isLogged) return;
+  
+    const logEntry = {
+      winnerSlot,
+      faintedSlot,
+      timestamp: new Date().toISOString(),
+    };
+  
+    try {
+      await fetch(`${apiUrl}/faintslots`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(logEntry),
+      });
+  
+      setIsLogged(true);
+    } catch (error) {
+      console.error("Failed to log faint slots:", error);
+    }
+  };
+  
+  
+  
+
   const determineWinner = async () => {
     if (hasLoggedResult) return;
-
+  
     const playerStats = playerDetails?.stats?.reduce((acc, stat) => {
       acc[stat.stat.name] = stat.base_stat;
       return acc;
@@ -119,87 +202,145 @@ const Pokebattle = () => {
       acc[stat.stat.name] = stat.base_stat;
       return acc;
     }, {});
-
+  
     const hpComparison = compareStats(playerStats?.hp, opponentStats?.hp);
     const attackComparison = compareStats(playerStats?.attack, opponentStats?.attack);
     const speedComparison = compareStats(playerStats?.speed, opponentStats?.speed);
-
-    const playerWins = [hpComparison, attackComparison, speedComparison].filter((result) => result > 0).length;
-    const opponentWins = [hpComparison, attackComparison, speedComparison].filter((result) => result < 0).length;
-
+  
+    const playerWins = [hpComparison, attackComparison, speedComparison].filter((r) => r > 0).length;
+    const opponentWins = [hpComparison, attackComparison, speedComparison].filter((r) => r < 0).length;
+  
+    let winner;
+    let faintedName;
+    let winnerName;
+    let faintedSlot;
+    let winnerSlot;
+  
     if (playerWins > opponentWins) {
-      setBattleWinner("You Win!");
-      setFaintedPokemon(opponentPokemon.name);
-      await logToDatabase("Player", playerPokemon.name, opponentPokemon.name);
+      winner = "Player";
+      winnerName = playerPokemon.name;
+      winnerSlot = playerPokemon.slotID;
+      faintedName = opponentPokemon.name;
+      faintedSlot = opponentPokemon.slotID;
     } else if (opponentWins > playerWins) {
-      setBattleWinner("AI Wins!");
-      setFaintedPokemon(playerPokemon.name);
-      await logToDatabase("AI", opponentPokemon.name, playerPokemon.name);
+      winner = "AI";
+      winnerName = opponentPokemon.name;
+      winnerSlot = opponentPokemon.slotID;
+      faintedName = playerPokemon.name;
+      faintedSlot = playerPokemon.slotID;
     } else {
-      setBattleWinner("It's a Draw!");
-      setFaintedPokemon(null);
-      await logToDatabase("Draw", playerPokemon.name, opponentPokemon.name); // Log the draw result
+      winner = "Draw";
+      winnerName = "None";
+      winnerSlot = null;
+      faintedName = "Both";
+      faintedSlot = "Both";
     }
-
+  
+    console.log(
+      `Battle Result: Winner - ${winnerName}, Fainted - ${faintedName} (Slot: ${faintedSlot}), Winner Slot: ${winnerSlot}`
+    );
+  
+    localStorage.setItem("battleResult", JSON.stringify({
+      winner,
+      winnerName,
+      winnerSlot,
+      faintedName,
+      faintedSlot,
+    }));
+  
+    setBattleWinner(winnerName);
+    setFaintedPokemon(faintedName);
+  
+    if (faintedSlot === "Both") {
+      await logFaintSlots(playerPokemon.slotID, opponentPokemon.slotID);  
+      await logFaintSlots(opponentPokemon.slotID, playerPokemon.slotID);  
+    } else {
+      await logFaintSlots(winnerSlot, faintedSlot); 
+    }
+  
     setHasLoggedResult(true);
+  
+    setTimeout(() => {
+      setShowResult(true);
+    }, 1500);
   };
+  
+  
+  
+  
+  
+
+  useEffect(() => {
+    setIsAudioPlaying(true);
+    return () => {
+      setIsAudioPlaying(false);
+    };
+  }, []);
 
   if (loadingSprites) {
     return <div>Loading...</div>;
   }
 
-  return (
-    <div className="team-solo-battle-container">
-      <div className="team-solo-pokemon-battle">
-        <div
-          className={`team-solo-pokemon-side team-solo-player-side animated-slide-in-left ${playerAttacks ? "attack" : ""} ${playerHit ? "hit" : ""} ${showResult ? "no-animation" : ""}`}
-        >
-          <h3>You</h3>
-          <img
-            src={playerDetails?.sprites?.front_default}
-            alt={playerDetails?.name}
-            className={playerAttacks ? "attack" : playerHit ? "hit" : ""}
-          />
-          <h4>{playerDetails?.name}</h4>
-          <p>HP: {playerDetails?.stats?.find((stat) => stat.stat.name === "hp")?.base_stat}</p>
-          <p>Attack: {playerDetails?.stats?.find((stat) => stat.stat.name === "attack")?.base_stat}</p>
-          <p>Speed: {playerDetails?.stats?.find((stat) => stat.stat.name === "speed")?.base_stat}</p>
-        </div>
 
-        <div className="team-solo-vs-container">
-          <h2>VS</h2>
-        </div>
 
-        <div
-          className={`team-solo-pokemon-side team-solo-opponent-side animated-slide-in-right ${opponentAttacks ? "attack" : ""} ${opponentHit ? "hit" : ""} ${showResult ? "no-animation" : ""}`}
-        >
-          <h3>AI</h3>
-          <img
-            src={opponentDetails?.sprites?.front_default}
-            alt={opponentDetails?.name}
-            className={opponentAttacks ? "attack" : opponentHit ? "hit" : ""}
-          />
-          <h4>{opponentDetails?.name}</h4>
-          <p>HP: {opponentDetails?.stats?.find((stat) => stat.stat.name === "hp")?.base_stat}</p>
-          <p>Attack: {opponentDetails?.stats?.find((stat) => stat.stat.name === "attack")?.base_stat}</p>
-          <p>Speed: {opponentDetails?.stats?.find((stat) => stat.stat.name === "speed")?.base_stat}</p>
-        </div>
+return (
+  <div className="team-solo-battle-container">
+    {isAudioPlaying && (
+      <audio autoPlay loop>
+        <source src={battleTheme} type="audio/mp3" />
+      </audio>
+    )}
+
+    <div className="team-solo-pokemon-battle">
+      {/* Player Pokémon */}
+      <div
+        className={`team-solo-pokemon-side team-solo-player-side animated-slide-in-left ${attackClassPlayer} ${hitClassPlayer} ${showResult ? "no-animation" : ""}`}
+      >
+        <h3>You</h3>
+        <img
+          src={playerDetails?.sprites?.front_default}
+          alt={playerDetails?.name}
+          className={attackClassPlayer || hitClassPlayer}
+        />
+        <h4>{playerDetails?.name}</h4>
+        <p>HP: {playerDetails?.stats?.find((stat) => stat.stat.name === "hp")?.base_stat}</p>
+        <p>Attack: {playerDetails?.stats?.find((stat) => stat.stat.name === "attack")?.base_stat}</p>
+        <p>Speed: {playerDetails?.stats?.find((stat) => stat.stat.name === "speed")?.base_stat}</p>
       </div>
 
-      {showResult && (
-  <div className="team-solo-battle-result fade-in-result">
-    <h3>{battleWinner}</h3>
-    {faintedPokemon && (
-      <>
+      {/* VS Label */}
+      <div className="team-solo-vs-container">
+        <h2>VS</h2>
+      </div>
+
+      {/* Opponent Pokémon */}
+      <div
+        className={`team-solo-pokemon-side team-solo-opponent-side animated-slide-in-right ${attackClassOpponent} ${hitClassOpponent} ${showResult ? "no-animation" : ""}`}
+      >
+        <h3>AI</h3>
+        <img
+          src={opponentDetails?.sprites?.front_default}
+          alt={opponentDetails?.name}
+          className={attackClassOpponent || hitClassOpponent}
+        />
+        <h4>{opponentDetails?.name}</h4>
+        <p>HP: {opponentDetails?.stats?.find((stat) => stat.stat.name === "hp")?.base_stat}</p>
+        <p>Attack: {opponentDetails?.stats?.find((stat) => stat.stat.name === "attack")?.base_stat}</p>
+        <p>Speed: {opponentDetails?.stats?.find((stat) => stat.stat.name === "speed")?.base_stat}</p>
+      </div>
+    </div>
+
+    {showResult && (
+      <div className="team-solo-battle-result fade-in-result">
+        <h3>{battleWinner}</h3>
         <p>{faintedPokemon} has fainted!</p>
-        <p className="press-b-text">Press <span className="press-b">(B)</span> to return</p>
-      </>
+        <p className="press-b-text">
+          Press <span className="press-b">(B)</span> to return
+        </p>
+      </div>
     )}
   </div>
-)}
-
-    </div>
-  );
+);
 };
 
 export default Pokebattle;

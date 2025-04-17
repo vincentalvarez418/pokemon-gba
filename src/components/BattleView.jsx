@@ -34,6 +34,7 @@ const BattleView = () => {
   });
 
   const [battleLog, setBattleLog] = useState([]);
+  const [faintedSlots, setFaintedSlots] = useState([]);
 
   useEffect(() => {
     const fetchPlayerTeam = async () => {
@@ -64,7 +65,38 @@ const BattleView = () => {
       }
     };
     fetchBattleLog();
+
+    const fetchFaintedSlots = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+        const response = await fetch(`${apiUrl}/faintslots`);
+        const data = await response.json();
+        setFaintedSlots(data);
+      } catch (error) {
+        console.error("Failed to fetch fainted slots:", error);
+      }
+    };
+    fetchFaintedSlots();
   }, []);
+
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+        const response = await fetch(`${apiUrl}/faintslots`);
+        const data = await response.json();
+
+        if (JSON.stringify(faintedSlots) !== JSON.stringify(data)) {
+          setFaintedSlots(data);
+        }
+      } catch (error) {
+        console.error("Error fetching faintslots:", error);
+      }
+    }, 500); 
+
+    return () => clearInterval(interval); 
+  }, [faintedSlots]);
 
   useEffect(() => {
     if (battleLog.length > 0) {
@@ -73,14 +105,34 @@ const BattleView = () => {
       setPlayerWinCount(playerWins);
       setAiWinCount(aiWins);
     }
-  }, [battleLog]);
+
+
+    const logSlots = (team, battleStatus, teamName) => {
+      const availableSlots = team.filter((pokemon) => {
+        const status = battleStatus[pokemon?.slotID]?.status;
+        const isFainted = faintedSlots.some(faint => faint.faintedSlot === pokemon?.slotID);
+        return status !== "fainted" && !isFainted;
+      }).length;
+
+      const faintedSlotsCount = team.length - availableSlots;
+      console.log(`${teamName} - Available Slots: ${availableSlots}, Fainted Slots: ${faintedSlotsCount}`);
+    };
+
+    // Log for player and opponent
+    logSlots(playerTeam, playerBattleStatus, "Player");
+    logSlots(labeledOpponentTeam, opponentBattleStatus, "AI");
+
+  }, [battleLog, playerBattleStatus, opponentBattleStatus, playerTeam, faintedSlots, labeledOpponentTeam]);
 
   const handlePokemonClick = (team, index, isPlayer) => {
     const selected = team[index];
     const status = isPlayer
       ? playerBattleStatus[selected.slotID]?.status
       : opponentBattleStatus[selected.slotID]?.status;
-    if (status === "fainted" || status === "won") return;
+
+    const isFainted = faintedSlots.some(faint => faint.faintedSlot === selected.slotID);
+  
+    if (status === "fainted" || status === "won" || isFainted) return; 
     if (isPlayer) {
       setSelectedPlayer({ ...selected });
     } else {
@@ -89,8 +141,16 @@ const BattleView = () => {
   };
 
   const handleBattleConfirmation = () => {
+    localStorage.setItem("battleSelection", JSON.stringify({
+      playerPokemon: { ...selectedPlayer, slotID: selectedPlayer.slotID },
+      opponentPokemon: { ...selectedOpponent, slotID: selectedOpponent.slotID }
+    }));
+
     navigate("/pokebattle", {
-      state: { playerPokemon: selectedPlayer, opponentPokemon: selectedOpponent },
+      state: {
+        playerPokemon: { ...selectedPlayer, slotID: selectedPlayer.slotID },
+        opponentPokemon: { ...selectedOpponent, slotID: selectedOpponent.slotID }
+      },
     });
   };
 
@@ -114,30 +174,19 @@ const BattleView = () => {
           {[...Array(6)].map((_, index) => {
             const pokemon = labeledOpponentTeam[index];
             const status = opponentBattleStatus[pokemon?.slotID]?.status;
-            const isDisabled = status === "fainted" || status === "won";
+            const isFainted = faintedSlots.some(faint => faint.faintedSlot === pokemon?.slotID);
+            const isDisabled = status === "fainted" || status === "won" || isFainted;
             return (
               <div
                 key={index}
-                className={`pokemon-card ${
-                  selectedOpponent?.slotID === pokemon?.slotID ? "selected" : ""
-                } ${!pokemon ? "empty" : ""} ${
-                  status === "fainted" ? "fainted" : ""
-                } ${status === "won" ? "won" : ""}`}
+                className={`pokemon-card ${selectedOpponent?.slotID === pokemon?.slotID ? "selected" : ""} ${!pokemon ? "empty" : ""} ${isFainted ? "fainted" : ""} ${status === "won" ? "won" : ""}`}
                 onClick={() => pokemon && handlePokemonClick(labeledOpponentTeam, index, false)}
                 style={{ pointerEvents: isDisabled ? "none" : "auto" }}
               >
                 {pokemon ? (
                   <>
                     <h4>{pokemon.name}</h4>
-                    {status && (
-                      <p className="status-text">
-                        {status === "fainted"
-                          ? "Fainted"
-                          : status === "won"
-                          ? "Won"
-                          : "Fought"}
-                      </p>
-                    )}
+                    {isFainted ? <p className="status-text">Fainted</p> : ""}
                   </>
                 ) : (
                   <h4>Empty</h4>
@@ -159,30 +208,19 @@ const BattleView = () => {
             [...Array(6)].map((_, index) => {
               const pokemon = playerTeam[index];
               const status = playerBattleStatus[pokemon?.slotID]?.status;
-              const isDisabled = status === "fainted" || status === "won";
+              const isFainted = faintedSlots.some(faint => faint.faintedSlot === pokemon?.slotID);
+              const isDisabled = status === "fainted" || status === "won" || isFainted;
               return (
                 <div
                   key={index}
-                  className={`pokemon-card ${
-                    selectedPlayer?.slotID === pokemon?.slotID ? "selected" : ""
-                  } ${!pokemon ? "empty" : ""} ${
-                    status === "fainted" ? "fainted" : ""
-                  } ${status === "won" ? "won" : ""}`}
+                  className={`pokemon-card ${selectedPlayer?.slotID === pokemon?.slotID ? "selected" : ""} ${!pokemon ? "empty" : ""} ${isFainted ? "fainted" : ""} ${status === "won" ? "won" : ""}`}
                   onClick={() => pokemon && handlePokemonClick(playerTeam, index, true)}
                   style={{ pointerEvents: isDisabled ? "none" : "auto" }}
                 >
                   {pokemon ? (
                     <>
                       <h4>{pokemon.name}</h4>
-                      {status && (
-                        <p className="status-text">
-                          {status === "fainted"
-                            ? "Fainted"
-                            : status === "won"
-                            ? "Won"
-                            : "Fought"}
-                        </p>
-                      )}
+                      {isFainted ? <p className="status-text">Fainted</p> : ""}
                     </>
                   ) : (
                     <h4>Empty</h4>
@@ -214,8 +252,7 @@ const BattleView = () => {
       )}
 
       <p className="return-text">TAP ON POKEMON TO SELECT</p>
-      <p className="return-text">(B) TO RETURN</p>
-
+      <p className="return-text">B = Return | A = Reset</p>
     </div>
   );
 };

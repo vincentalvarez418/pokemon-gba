@@ -186,4 +186,8 @@
   color: rgb(0, 0, 0);
 }
 
+.pokemon-card.fainted {
+  background-color: #808080;
+  opacity: 0.6;
+}
 

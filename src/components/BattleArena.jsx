@@ -35,7 +35,7 @@ const BattleArena = () => {
     };
   };
   
-
+  
   useEffect(() => {
     const fetchReadinessData = async () => {
       try {
@@ -70,26 +70,42 @@ const BattleArena = () => {
     const attackerStats = await fetchPokemonStats(attacker.pokemonID);
     const defenderStats = await fetchPokemonStats(defender.pokemonID);
   
-    let attackerWins = 0;
-    let defenderWins = 0;
-  
-    if (attackerStats.hp > defenderStats.hp) attackerWins++;
-    else if (defenderStats.hp > attackerStats.hp) defenderWins++;
-  
-    if (attackerStats.attack > defenderStats.attack) attackerWins++;
-    else if (defenderStats.attack > attackerStats.attack) defenderWins++;
-  
-    if (attackerStats.speed > defenderStats.speed) attackerWins++;
-    else if (defenderStats.speed > attackerStats.speed) defenderWins++;
-
-    if (attackerWins > defenderWins) {
-      return { winner: attacker, loser: defender };
-    } else if (defenderWins > attackerWins) {
-      return { winner: defender, loser: attacker }; 
-    } else {
+    if (!attackerStats || !defenderStats) {
       return { winner: null, loser: null }; 
     }
+  
+    if (attackerStats.hp !== defenderStats.hp) {
+      return attackerStats.hp > defenderStats.hp
+        ? { winner: attacker, loser: defender }
+        : { winner: defender, loser: attacker };
+    }
+  
+    if (attackerStats.attack !== defenderStats.attack) {
+      return attackerStats.attack > defenderStats.attack
+        ? { winner: attacker, loser: defender }
+        : { winner: defender, loser: attacker };
+    }
+  
+    if (attackerStats.speed !== defenderStats.speed) {
+      return attackerStats.speed > defenderStats.speed
+        ? { winner: attacker, loser: defender }
+        : { winner: defender, loser: attacker };
+    }
+  
+    return { winner: null, loser: null }; 
   };
+  
+  useEffect(() => {
+    const savedState = JSON.parse(localStorage.getItem("battleState"));
+    if (savedState) {
+      setPlayerNickname(savedState.playerNickname || "");
+      setOpponentNickname(savedState.opponentNickname || "");
+      setIsFighting(savedState.isFighting || false);
+      setBattleComplete(savedState.battleComplete || false);
+    }
+  }, []);
+  
+  
   
 
   const handleFight = async () => {
@@ -107,12 +123,23 @@ const BattleArena = () => {
       return;
     }
   
+    // Save to localStorage
+    localStorage.setItem(
+      "battleState",
+      JSON.stringify({
+        playerNickname,
+        opponentNickname,
+        isFighting: true,
+        battleComplete: false,
+      })
+    );
+  
     setIsFighting(true);
     setIsModalOpen(false);
   
     const battleLogs = [];
-    let playerIndex = 0; 
-    let opponentIndex = 0; 
+    let playerIndex = 0;
+    let opponentIndex = 0;
   
     while (playerIndex < playerPokemons.length && opponentIndex < opponentPokemons.length) {
       const playerPoke = playerPokemons[playerIndex];
@@ -137,10 +164,10 @@ const BattleArena = () => {
   
       if (result.winner === playerPoke) {
         setPlayerScore((prev) => prev + 1);
-        opponentIndex++; 
+        opponentIndex++;
       } else if (result.winner === opponentPoke) {
-        setOpponentScore((prev) => prev + 1); 
-        playerIndex++; 
+        setOpponentScore((prev) => prev + 1);
+        playerIndex++;
       } else {
         playerIndex++;
         opponentIndex++;
@@ -155,16 +182,32 @@ const BattleArena = () => {
           body: JSON.stringify(log),
         });
       }
-      toast.success("BATTLE OVER");
-      setBattleComplete(true); 
+      toast.success("SIMULATION OVER", {
+        className: "toast-custom",
+      });
+  
+      // Update localStorage for battle completion
+      localStorage.setItem(
+        "battleState",
+        JSON.stringify({
+          playerNickname,
+          opponentNickname,
+          isFighting: false,
+          battleComplete: true,
+        })
+      );
+  
+      setBattleComplete(true);
     } catch (error) {
       console.error("Error posting battle results:", error);
     } finally {
       setIsFighting(false);
     }
   };
+  
 
   const handleReturn = () => {
+    localStorage.removeItem("battleState")
     localStorage.removeItem("battleData");  
     sessionStorage.removeItem("battleData");  
 
