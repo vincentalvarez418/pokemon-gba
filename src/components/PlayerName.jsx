@@ -96,6 +96,7 @@ const PlayerName = () => {
           onChange={(e) => setName(e.target.value)}
           placeholder="Enter name"
         />
+        <br></br><br></br><br></br><br></br>
         <button className="playername-continue" type="submit">
           START
         </button>

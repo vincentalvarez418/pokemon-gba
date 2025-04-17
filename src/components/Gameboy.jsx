@@ -116,7 +116,14 @@ const Gameboy = () => {
     <div className={`gameboy-shell ${tiltEffect}`}>
       <div className="gameboy-screen">
         <div className="screen-inner">
-          {isHome ? <h1>Pokemon Retro Edition</h1> : <Outlet />}
+        {isHome ? (
+          <div className="retro-title-container">
+            <h1 className="retro-title">Pokemon Retro Edition</h1> <br></br> <br></br>
+            <p className="press-start">Press Start</p>
+          </div>
+        ) : (
+          <Outlet />
+        )}
           {location.pathname === "/pokebattle" && isReturnTextVisible && (
             <div className="return-text"></div>
           )}

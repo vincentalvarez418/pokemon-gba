@@ -7,7 +7,7 @@ const PokemonSelection = () => {
   const { battleId } = useParams();
   const location = useLocation();
   const role = location.state?.role;
-  const navigate = useNavigate();  // Initialize the navigate function
+  const navigate = useNavigate(); 
 
   const storageKey = `shuffle_${battleId}_${role}`;
   const [pokemonList, setPokemonList] = useState([]);

@@ -1,0 +1,74 @@
+.bulbasaur-gif {
+    position: fixed;
+    bottom: 25px;
+    left: -150px;
+    width: 200px;
+    z-index: -1;
+    animation: bulbasaurWalkAcross 10s linear infinite;
+  }
+  
+  .pikachu-gif {
+    position: fixed;
+    bottom: 10px;
+    left: -150px;
+    width: 230px;
+    z-index: -1;
+    animation: pikachuWalkAcross 7s linear infinite;
+  }
+  
+  @keyframes bulbasaurWalkAcross {
+    0% {
+      left: -150px;
+    }
+    100% {
+      left: calc(100vw + 150px);
+    }
+  }
+  
+  @keyframes pikachuWalkAcross {
+    0% {
+      left: -200px;
+    }
+    100% {
+      left: calc(100vw + 150px);
+    }
+  }
+  
+  .bird-gif {
+    position: fixed;
+    top: 40px;
+    left: -150px;
+    width: 220px;
+    z-index: 0;
+  }
+  
+  .bird-one {
+    animation: birdOneFlyAcross 14s linear infinite;
+  }
+  
+  .bird-two {
+    animation: birdTwoFlyAcross 9s linear infinite;
+  }
+  
+  @keyframes birdOneFlyAcross {
+    0% {
+      left: -150px;
+      top: 40px;
+    }
+    100% {
+      left: calc(100vw + 150px);
+      top: 40px;
+    }
+  }
+  
+  @keyframes birdTwoFlyAcross {
+    0% {
+      left: -150px;
+      top: 40px;
+    }
+    100% {
+      left: calc(100vw + 150px);
+      top: 50px;
+    }
+  }
+  
