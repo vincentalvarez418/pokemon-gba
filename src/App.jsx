@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Gameboy from "./components/Gameboy";
 import PlayerName from "./components/PlayerName";
@@ -18,6 +18,10 @@ import PokemonSelection from "./components/PokemonSelection";
 import BattleArena from './components/BattleArena';
 
 function App() {
+  useEffect(() => {
+    document.body.style.zoom = "90%";
+  }, []); 
+
   return (
     <Router>
       <Routes>
