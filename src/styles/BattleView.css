@@ -13,7 +13,9 @@
   align-items: center;
   margin-top: 10px;
   gap: 40px;
+  flex-direction: row-reverse;
 }
+
 
 .pokemon-side {
   width: 30%; 
@@ -28,6 +30,7 @@
   border: 2px solid transparent;
   border-radius: 6px;
   height: 24px;
+  width: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.1s ease, border-color 0.2s ease;
@@ -37,7 +40,19 @@
   align-items: center;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
+
+
+.player-side .pokemon-card {
+  transform: scaleX(-1);
+}
+
+
+.opponent-side .pokemon-card {
+  transform: scaleX(1);
+}
+
 
 .pokemon-card.empty {
   height: 30px;
@@ -135,8 +150,10 @@
 }
 
 .pokemon-card.fainted {
-  background-color: #a88;
+  background-color: #808080;
   opacity: 0.6;
+  transform: none; 
+  margin-top: 0; 
 }
 
 .pokemon-card.won {

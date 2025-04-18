@@ -188,9 +188,6 @@ const Pokebattle = () => {
     }
   };
   
-  
-  
-
   const determineWinner = async () => {
     if (hasLoggedResult) return;
   
@@ -257,6 +254,9 @@ const Pokebattle = () => {
     } else {
       await logFaintSlots(winnerSlot, faintedSlot); 
     }
+
+    // Ensure logging to battle logs after determining the winner
+    await logToDatabase(winner, winnerName, faintedName, winnerSlot, faintedSlot);
   
     setHasLoggedResult(true);
   
@@ -265,11 +265,6 @@ const Pokebattle = () => {
     }, 1500);
   };
   
-  
-  
-  
-  
-
   useEffect(() => {
     setIsAudioPlaying(true);
     return () => {
@@ -277,70 +272,70 @@ const Pokebattle = () => {
     };
   }, []);
 
+
   if (loadingSprites) {
     return <div>Loading...</div>;
   }
 
+  return (
+    <div className="team-solo-battle-container">
+      {isAudioPlaying && (
+        <audio autoPlay loop>
+          <source src={battleTheme} type="audio/mp3" />
+        </audio>
+      )}
 
+      <div className="team-solo-pokemon-battle">
+        {/* Player Pokémon */}
+        <div
+          className={`team-solo-pokemon-side team-solo-player-side animated-slide-in-left ${attackClassPlayer} ${hitClassPlayer} ${showResult ? "no-animation" : ""}`}
+        >
+          <h3>You</h3>
+          <img
+            src={playerDetails?.sprites?.front_default}
+            alt={playerDetails?.name}
+            className={attackClassPlayer || hitClassPlayer}
+          />
+          <h4>{playerDetails?.name}</h4>
+          <p>HP: {playerDetails?.stats?.find((stat) => stat.stat.name === "hp")?.base_stat}</p>
+          <p>Attack: {playerDetails?.stats?.find((stat) => stat.stat.name === "attack")?.base_stat}</p>
+          <p>Speed: {playerDetails?.stats?.find((stat) => stat.stat.name === "speed")?.base_stat}</p>
+        </div>
 
-return (
-  <div className="team-solo-battle-container">
-    {isAudioPlaying && (
-      <audio autoPlay loop>
-        <source src={battleTheme} type="audio/mp3" />
-      </audio>
-    )}
+        {/* VS Label */}
+        <div className="team-solo-vs-container">
+          <h2>VS</h2>
+        </div>
 
-    <div className="team-solo-pokemon-battle">
-      {/* Player Pokémon */}
-      <div
-        className={`team-solo-pokemon-side team-solo-player-side animated-slide-in-left ${attackClassPlayer} ${hitClassPlayer} ${showResult ? "no-animation" : ""}`}
-      >
-        <h3>You</h3>
-        <img
-          src={playerDetails?.sprites?.front_default}
-          alt={playerDetails?.name}
-          className={attackClassPlayer || hitClassPlayer}
-        />
-        <h4>{playerDetails?.name}</h4>
-        <p>HP: {playerDetails?.stats?.find((stat) => stat.stat.name === "hp")?.base_stat}</p>
-        <p>Attack: {playerDetails?.stats?.find((stat) => stat.stat.name === "attack")?.base_stat}</p>
-        <p>Speed: {playerDetails?.stats?.find((stat) => stat.stat.name === "speed")?.base_stat}</p>
+        {/* Opponent Pokémon */}
+        <div
+          className={`team-solo-pokemon-side team-solo-opponent-side animated-slide-in-right ${attackClassOpponent} ${hitClassOpponent} ${showResult ? "no-animation" : ""}`}
+        >
+          <h3>AI</h3>
+          <img
+            src={opponentDetails?.sprites?.front_default}
+            alt={opponentDetails?.name}
+            className={attackClassOpponent || hitClassOpponent}
+          />
+          <h4>{opponentDetails?.name}</h4>
+          <p>HP: {opponentDetails?.stats?.find((stat) => stat.stat.name === "hp")?.base_stat}</p>
+          <p>Attack: {opponentDetails?.stats?.find((stat) => stat.stat.name === "attack")?.base_stat}</p>
+          <p>Speed: {opponentDetails?.stats?.find((stat) => stat.stat.name === "speed")?.base_stat}</p>
+        </div>
       </div>
 
-      {/* VS Label */}
-      <div className="team-solo-vs-container">
-        <h2>VS</h2>
-      </div>
-
-      {/* Opponent Pokémon */}
-      <div
-        className={`team-solo-pokemon-side team-solo-opponent-side animated-slide-in-right ${attackClassOpponent} ${hitClassOpponent} ${showResult ? "no-animation" : ""}`}
-      >
-        <h3>AI</h3>
-        <img
-          src={opponentDetails?.sprites?.front_default}
-          alt={opponentDetails?.name}
-          className={attackClassOpponent || hitClassOpponent}
-        />
-        <h4>{opponentDetails?.name}</h4>
-        <p>HP: {opponentDetails?.stats?.find((stat) => stat.stat.name === "hp")?.base_stat}</p>
-        <p>Attack: {opponentDetails?.stats?.find((stat) => stat.stat.name === "attack")?.base_stat}</p>
-        <p>Speed: {opponentDetails?.stats?.find((stat) => stat.stat.name === "speed")?.base_stat}</p>
-      </div>
+      {showResult && (
+        <div className="team-solo-battle-result fade-in-result">
+          <h3>{battleWinner}</h3>
+          <p>{faintedPokemon} has fainted!</p>
+          <p className="press-b-text">
+            Press <span className="press-b">(B)</span> to return
+          </p>
+        </div>
+      )}
     </div>
-
-    {showResult && (
-      <div className="team-solo-battle-result fade-in-result">
-        <h3>{battleWinner}</h3>
-        <p>{faintedPokemon} has fainted!</p>
-        <p className="press-b-text">
-          Press <span className="press-b">(B)</span> to return
-        </p>
-      </div>
-    )}
-  </div>
-);
+  );
 };
+
 
 export default Pokebattle;

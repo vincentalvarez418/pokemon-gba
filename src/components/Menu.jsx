@@ -21,8 +21,9 @@ const Menu = () => {
           const pokemonData = await pokemonDetails.json();
           return {
             name: pokemon.name,
-            id: pokemonData.id,  
-            sprite: pokemonData.sprites.front_default, 
+            id: pokemonData.id,
+            sprite: pokemonData.sprites.front_default,
+            url: pokemon.url, 
           };
         }));
 
@@ -57,12 +58,17 @@ const Menu = () => {
   const handleAddPokemonToTeam = () => {
     const pokemon = pokemonList.find((p) => p.name === selectedPokemon);
     if (!pokemon) return;
-
+  
     const updatedTeam = [...team];
     const emptySlotIndex = updatedTeam.findIndex((p) => p === null);
-
+  
     if (emptySlotIndex !== -1) {
-      updatedTeam[emptySlotIndex] = pokemon;
+      updatedTeam[emptySlotIndex] = {
+        name: pokemon.name,
+        id: pokemon.id,
+        sprite: pokemon.sprite,
+        url: pokemon.url, 
+      };
       setTeam(updatedTeam);
     }
   };

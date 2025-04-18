@@ -129,7 +129,16 @@ const SoloBattle = () => {
           <div className="team-container">
             {opponentTeam.map((pokemon, index) => (
               <div key={index} className="pokemon-slot">
-                {pokemon ? pokemon.name : `Slot ${index + 1}`}
+                {pokemon ? (
+                    <>
+                      <img
+                        className="pokemon-image"
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                        alt={pokemon.name}
+                      />
+                      <div>{pokemon.name}</div>
+                    </>
+                  ) : `Slot ${index + 1}`}
                 {pokemon && (
                   <button
                     className="remove-button"
