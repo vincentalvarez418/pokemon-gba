@@ -17,7 +17,7 @@ const SoloBattle = () => {
   const saveOpponentTeamToDatabase = async (team) => {
     try {
       const response = await fetch(`${apiUrl}/opponent-team`, {
-        method: "PUT", // Use PUT to update the existing opponent team
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -25,7 +25,8 @@ const SoloBattle = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to save opponent team to the database");
+        const errorMessage = await response.text(); // Capture server error response
+        throw new Error(`Failed to save opponent team: ${errorMessage}`);
       }
 
       console.log("Opponent team saved to database successfully.");
@@ -38,11 +39,12 @@ const SoloBattle = () => {
   const removeOpponentTeamFromDatabase = async () => {
     try {
       const response = await fetch(`${apiUrl}/opponent-team`, {
-        method: "DELETE", // Use DELETE to remove the opponent team
+        method: "DELETE",
       });
 
       if (!response.ok) {
-        throw new Error("Failed to remove opponent team from the database");
+        const errorMessage = await response.text();
+        throw new Error(`Failed to remove opponent team: ${errorMessage}`);
       }
 
       console.log("Opponent team removed from database successfully.");
@@ -52,15 +54,17 @@ const SoloBattle = () => {
   };
 
   useEffect(() => {
-    const savedOpponentTeam = JSON.parse(localStorage.getItem("opponentTeam"));
+    const savedOpponentTeam = localStorage.getItem("opponentTeam");
     if (savedOpponentTeam) {
-      setOpponentTeam(savedOpponentTeam);
+      setOpponentTeam(JSON.parse(savedOpponentTeam));
     }
 
     const fetchPokemons = async () => {
       try {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
+        if (!response.ok) throw new Error("Failed to fetch Pokémon data");
         const data = await response.json();
+
         setPokemonList(data.results);
         const firstPokemon = data.results[0];
         setSelectedOpponentPokemon(firstPokemon.name);
@@ -100,7 +104,7 @@ const SoloBattle = () => {
   };
 
   const handleContinue = () => {
-    if (opponentTeam.every(pokemon => pokemon === null)) {
+    if (opponentTeam.every((pokemon) => pokemon === null)) {
       setIsDialogOpen(true);
       return;
     }
@@ -145,9 +149,9 @@ const SoloBattle = () => {
           className="pokemon-dropdown"
           value={selectedOpponentPokemon}
           onChange={(e) => {
-            const selectedPokemon = pokemonList.find(p => p.name === e.target.value);
+            const selectedPokemon = pokemonList.find((p) => p.name === e.target.value);
             setSelectedOpponentPokemon(e.target.value);
-            setSelectedOpponentPokemonId(selectedPokemon.id);
+            setSelectedOpponentPokemonId(selectedPokemon.url.split('/')[6]);
           }}
         >
           {pokemonList.map((pokemon, index) => (
@@ -176,11 +180,9 @@ const SoloBattle = () => {
         <Dialog.Content className="dialog-content">
           <Dialog.Title className="dialog-title">No opponents..</Dialog.Title>
           <Dialog.Description className="dialog-description">
-            Select at least one enemy pokemon.
+            Select at least one enemy Pokémon.
           </Dialog.Description>
-          <Dialog.Close className="dialog-close-button">
-            Close
-          </Dialog.Close>
+          <Dialog.Close className="dialog-close-button">Close</Dialog.Close>
         </Dialog.Content>
       </Dialog.Root>
     </div>
