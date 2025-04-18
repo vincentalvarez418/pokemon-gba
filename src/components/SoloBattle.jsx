@@ -7,9 +7,49 @@ const SoloBattle = () => {
   const [opponentTeam, setOpponentTeam] = useState(Array(6).fill(null));
   const [pokemonList, setPokemonList] = useState([]);
   const [selectedOpponentPokemon, setSelectedOpponentPokemon] = useState("");
-  const [selectedOpponentPokemonId, setSelectedOpponentPokemonId] = useState(null);  
-  const [isDialogOpen, setIsDialogOpen] = useState(false); 
+  const [selectedOpponentPokemonId, setSelectedOpponentPokemonId] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const navigate = useNavigate();
+
+  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+  // Function to save opponent team to database
+  const saveOpponentTeamToDatabase = async (team) => {
+    try {
+      const response = await fetch(`${apiUrl}/opponent-team`, {
+        method: "PUT", // Use PUT to update the existing opponent team
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ team }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save opponent team to the database");
+      }
+
+      console.log("Opponent team saved to database successfully.");
+    } catch (error) {
+      console.error("Error saving opponent team to database:", error);
+    }
+  };
+
+  // Function to delete opponent team from the database
+  const removeOpponentTeamFromDatabase = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/opponent-team`, {
+        method: "DELETE", // Use DELETE to remove the opponent team
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to remove opponent team from the database");
+      }
+
+      console.log("Opponent team removed from database successfully.");
+    } catch (error) {
+      console.error("Error removing opponent team from database:", error);
+    }
+  };
 
   useEffect(() => {
     const savedOpponentTeam = JSON.parse(localStorage.getItem("opponentTeam"));
@@ -24,7 +64,7 @@ const SoloBattle = () => {
         setPokemonList(data.results);
         const firstPokemon = data.results[0];
         setSelectedOpponentPokemon(firstPokemon.name);
-        setSelectedOpponentPokemonId(firstPokemon.url.split('/')[6]);  
+        setSelectedOpponentPokemonId(firstPokemon.url.split('/')[6]);
       } catch (error) {
         console.error("Failed to fetch Pokémon list:", error);
       }
@@ -45,6 +85,7 @@ const SoloBattle = () => {
       updatedOpponentTeam[emptySlotIndex] = uniquePokemon;
       setOpponentTeam(updatedOpponentTeam);
       localStorage.setItem("opponentTeam", JSON.stringify(updatedOpponentTeam));
+      saveOpponentTeamToDatabase(updatedOpponentTeam); // Save to database
     } else {
       alert("Opponent's team is already full!");
     }
@@ -52,18 +93,25 @@ const SoloBattle = () => {
 
   const handleRemoveOpponentPokemon = (index) => {
     const updatedOpponentTeam = [...opponentTeam];
-    updatedOpponentTeam[index] = null;  
+    updatedOpponentTeam[index] = null;
     setOpponentTeam(updatedOpponentTeam);
     localStorage.setItem("opponentTeam", JSON.stringify(updatedOpponentTeam));
+    saveOpponentTeamToDatabase(updatedOpponentTeam); // Save to database
   };
 
   const handleContinue = () => {
     if (opponentTeam.every(pokemon => pokemon === null)) {
-      setIsDialogOpen(true); 
+      setIsDialogOpen(true);
       return;
     }
 
     navigate("/battle", { state: { opponentTeam } });
+  };
+
+  const handleClearOpponentTeam = () => {
+    setOpponentTeam(Array(6).fill(null));
+    localStorage.removeItem("opponentTeam");
+    removeOpponentTeamFromDatabase(); // Remove from database
   };
 
   return (
@@ -99,7 +147,7 @@ const SoloBattle = () => {
           onChange={(e) => {
             const selectedPokemon = pokemonList.find(p => p.name === e.target.value);
             setSelectedOpponentPokemon(e.target.value);
-            setSelectedOpponentPokemonId(selectedPokemon.url.split('/')[6]); 
+            setSelectedOpponentPokemonId(selectedPokemon.id);
           }}
         >
           {pokemonList.map((pokemon, index) => (
@@ -116,6 +164,9 @@ const SoloBattle = () => {
           </button>
           <button className="continue-button" onClick={handleContinue}>
             BATTLE
+          </button>
+          <button className="clear-team-button" onClick={handleClearOpponentTeam}>
+            CLEAR TEAM
           </button>
         </div>
       </div>

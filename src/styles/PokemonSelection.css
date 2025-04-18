@@ -19,7 +19,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    gap: 10px; /* Spacing between the button and the header */
+    gap: 10px; 
   }
 
   .ready-button {
