@@ -15,8 +15,19 @@ const Menu = () => {
       try {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
         const data = await response.json();
-        setPokemonList(data.results);
-        setSelectedPokemon(data.results[0].name);
+
+        const pokemonWithDetails = await Promise.all(data.results.map(async (pokemon) => {
+          const pokemonDetails = await fetch(pokemon.url);
+          const pokemonData = await pokemonDetails.json();
+          return {
+            name: pokemon.name,
+            id: pokemonData.id,  
+            sprite: pokemonData.sprites.front_default, 
+          };
+        }));
+
+        setPokemonList(pokemonWithDetails);
+        setSelectedPokemon(pokemonWithDetails[0].name);
       } catch (error) {
         console.error("Failed to fetch Pokémon list:", error);
       }
@@ -108,7 +119,18 @@ const Menu = () => {
           <div className="team-container">
             {team.map((pokemon, index) => (
               <div key={index} className="pokemon-slot">
-                {pokemon ? pokemon.name : `Slot ${index + 1}`}
+                {pokemon ? (
+                  <>
+                    <img
+                      className="pokemon-image"
+                      src={pokemon.sprite}
+                      alt={pokemon.name}
+                    />
+                    <span>{pokemon.name}</span> 
+                  </>
+                ) : (
+                  `Slot ${index + 1}`
+                )}
                 {pokemon && (
                   <button
                     className="remove-button"

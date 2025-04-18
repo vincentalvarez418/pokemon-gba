@@ -34,7 +34,7 @@
 }
 
 .pokemon-slot {
-  width: 120px;
+  width: 150px;
   height: 38px;
   background-color: #f0f0f0;
   border: 2px solid #ccc;
@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  font-size: 10px;
+  font-size: 8px;
   font-family: 'Press Start 2P', cursive;
   text-transform: capitalize;
 }
@@ -67,6 +67,17 @@
   justify-content: center;
   transition: transform 0.1s ease;
 }
+
+.pokemon-image {
+  image-rendering: pixelated;
+  width: 50px;
+  height: 75px;
+  object-fit: contain;
+  margin-bottom: 0;
+  margin-right: 0px;
+  filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+}
+
 
 .remove-button:active {
   transform: scale(0.95);
