@@ -98,7 +98,7 @@ const PlayerName = () => {
         />
         <br></br><br></br><br></br><br></br>
         <button className="playername-continue" type="submit">
-          START
+          CONNECT
         </button>
       </form>
 
