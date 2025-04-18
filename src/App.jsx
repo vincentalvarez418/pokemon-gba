@@ -17,6 +17,7 @@ import QRHistory from "./components/QRHistory";
 import PokemonSelection from "./components/PokemonSelection";
 import BattleArena from './components/BattleArena';
 import HomeAnimations from './components/HomeAnimations';
+import RenderPinger from "./components/RenderPinger";
 
 function App() {
   useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <>
+       <RenderPinger />
       <HomeAnimations />
       <Router>
         <Routes>
