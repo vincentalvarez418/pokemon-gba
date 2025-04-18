@@ -12,7 +12,7 @@ const Gameboy = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReturnTextVisible, setIsReturnTextVisible] = useState(false);
   const [canPressB, setCanPressB] = useState(true);
-  const [refreshBattleView, setRefreshBattleView] = useState(false); // Add state to trigger refresh
+  const [refreshBattleView, setRefreshBattleView] = useState(false); 
   const navigate = useNavigate();
 
   const isHome = location.pathname === "/";
@@ -47,7 +47,7 @@ const Gameboy = () => {
         setTiltEffect("tilt-down");
         break;
       case "a":
-        setTiltEffect("spin");
+        setTiltEffect("tilt-left");
         if (location.pathname === "/battle") {
           try {
             const response = await fetch(`${apiUrl}/faintslots`);
@@ -62,11 +62,10 @@ const Gameboy = () => {
             await Promise.all(deletePromises);
             console.log("Faint slots wiped successfully!");
 
-            // Trigger refresh in BattleView component after 1 second
             setTimeout(() => {
-              setRefreshBattleView((prev) => !prev); // Toggle the state to trigger refresh
-              setTiltEffect(""); // Reset tilt effect (remove spin)
-            }, 1000); // Wait 1 second before triggering the refresh
+              setRefreshBattleView((prev) => !prev); 
+              setTiltEffect(""); 
+            }, 1000); 
           } catch (error) {
             console.error("Error wiping faint slots:", error);
           }
