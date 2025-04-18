@@ -1,12 +1,14 @@
-# React + Vite
+⚛️ React + Vite + Render + Netlify
+Note:
+This project uses Vite and is hosted on Netlify, while the JSON database is hosted on Render.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+It runs on the free tier of Render, so you may experience a slight delay when accessing the backend due to server inactivity (cold start).
 
-Currently, two official plugins are available:
+Pokémon Sim Gen 1 is a web app featuring simulation battles inspired by Gen 1 Pokémon.
+It includes:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🧢 Team Battles
 
-## Expanding the ESLint configuration
+📷 QR Code Battles
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+💾 Retro UI built with CSS and React
