@@ -190,3 +190,13 @@
     overflow: hidden;
   }
   
+  .pokemon-image {
+    image-rendering: pixelated;
+    width: 50px;
+    height: 75px;
+    object-fit: contain;
+    margin-bottom: 0;
+    margin-right: 0px;
+    filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+  }
+  
