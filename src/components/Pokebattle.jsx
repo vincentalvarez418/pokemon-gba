@@ -65,9 +65,7 @@ const Pokebattle = () => {
     if (playerDetails && opponentDetails && !loadingSprites && !battleStarted) {
       setBattleStarted(true);
     
-      // Delay by 2.5 seconds before battle starts
       setTimeout(() => {
-        // Player attack animations
         setPlayerAttacks(true);
         setOpponentHit(true);
         setTimeout(() => {
