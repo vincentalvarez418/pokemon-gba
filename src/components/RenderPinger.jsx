@@ -12,10 +12,17 @@ const RenderPinger = ({ children }) => {
   const [statusMessage, setStatusMessage] = useState("CONNECTING TO SERVER");
   const [displayOverlay, setDisplayOverlay] = useState(true);
 
+  const isCacheValid = () => {
+    const lastConnected = localStorage.getItem("lastConnected");
+    if (!lastConnected) return false;
+
+    const timeElapsed = Date.now() - parseInt(lastConnected);
+    return timeElapsed < 15 * 60 * 1000; // 15 minutes in milliseconds
+  };
+
   const pingServer = async () => {
     try {
       const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
-
       const res = await fetch(`${apiUrl}/pings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -26,7 +33,8 @@ const RenderPinger = ({ children }) => {
         if (!serverUp) {
           setServerUp(true);
           setStatusMessage("WELCOME TRAINER!");
-          setDots(""); 
+          setDots("");
+          localStorage.setItem("lastConnected", Date.now().toString());
           setTimeout(() => {
             setDisplayOverlay(false);
           }, 2000);
@@ -42,41 +50,48 @@ const RenderPinger = ({ children }) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      pingServer();
-    }, 5000); 
+    if (!isCacheValid()) {
+      const interval = setInterval(() => {
+        pingServer();
+      }, 5000);
 
-    const dotInterval = setInterval(() => {
-      if (!serverUp) {
-        setDots((prev) => (prev.length < 3 ? prev + "." : ""));
-      }
-    }, 500);
+      const dotInterval = setInterval(() => {
+        if (!serverUp) {
+          setDots((prev) => (prev.length < 3 ? prev + "." : ""));
+        }
+      }, 500);
 
-    return () => {
-      clearInterval(interval);
-      clearInterval(dotInterval);
-    };
+      return () => {
+        clearInterval(interval);
+        clearInterval(dotInterval);
+      };
+    } else {
+      setServerUp(true);
+      setTimeout(() => {
+        setDisplayOverlay(false);
+      }, 2000);
+    }
   }, [serverUp]);
 
-  if (!displayOverlay) {
-    return <>{children}</>;
-  }
-
-  return (
-    <div className="pinger-overlay">
-      <div className="pinger-container">
-        <p className="pinger-text">
-          {statusMessage}{dots}
-        </p>
-        <div className="pinger-sprites-container">
-          <img src={sprite1} alt="Pinger Sprite 1" className="pinger-sprite" />
-          <img src={sprite2} alt="Pinger Sprite 2" className="pinger-sprite" />
-          <img src={sprite3} alt="Pinger Sprite 3" className="pinger-sprite" />
-          <img src={sprite4} alt="Pinger Sprite 4" className="pinger-sprite" />
+  if (!isCacheValid() && displayOverlay) {
+    return (
+      <div className="pinger-overlay">
+        <div className="pinger-container">
+          <p className="pinger-text">
+            {statusMessage}{dots}
+          </p>
+          <div className="pinger-sprites-container">
+            <img src={sprite1} alt="Pinger Sprite 1" className="pinger-sprite" />
+            <img src={sprite2} alt="Pinger Sprite 2" className="pinger-sprite" />
+            <img src={sprite3} alt="Pinger Sprite 3" className="pinger-sprite" />
+            <img src={sprite4} alt="Pinger Sprite 4" className="pinger-sprite" />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <>{children}</>;
 };
 
 export default RenderPinger;

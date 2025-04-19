@@ -135,7 +135,7 @@ const BattleView = () => {
       } catch (error) {
         console.error("Error fetching faintslots:", error);
       }
-    }, 0); 
+    }, 2500); 
 
     return () => clearInterval(interval); 
   }, [faintedSlots]);
