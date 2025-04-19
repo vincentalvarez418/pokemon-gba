@@ -26,7 +26,7 @@ function App() {
 
   return (
     <>
-       <RenderPinger />
+      <RenderPinger>
       <HomeAnimations />
       <Router>
         <Routes>
@@ -49,6 +49,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      </RenderPinger>
     </>
   );
 }
