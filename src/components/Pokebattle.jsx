@@ -145,15 +145,20 @@ const Pokebattle = () => {
     if (isLogged) return;
   
     try {
+      let winnerPokemonSave = winner === "Draw" ? `${playerPokemon.name}, ${opponentPokemon.name}` : winnerPokemon;
+      let faintedPokemonSave = winner === "Draw" ? `${playerPokemon.name}, ${opponentPokemon.name}` : faintedPokemon;
+      let winnerSlotSave = winner === "Draw" ? `${playerPokemon.slotID}, ${opponentPokemon.slotID}` : winnerSlot;
+      let faintedSlotSave = winner === "Draw" ? `${playerPokemon.slotID}, ${opponentPokemon.slotID}` : faintedSlot;
+  
       await fetch(`${apiUrl}/temporarybattlelog`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           winner,
-          winnerPokemon,
-          faintedPokemon,
-          winnerSlot,
-          faintedSlot,
+          winnerPokemon: winnerPokemonSave,
+          faintedPokemon: faintedPokemonSave,
+          winnerSlot: winnerSlotSave,
+          faintedSlot: faintedSlotSave,
           timestamp: new Date().toISOString(),
         }),
       });
@@ -163,6 +168,7 @@ const Pokebattle = () => {
       console.error("Failed to log single battle result:", error);
     }
   };
+  
 
   const logFaintSlots = async (winnerSlot, faintedSlot) => {
     if (isLogged) return;
@@ -324,7 +330,7 @@ const Pokebattle = () => {
 
       {showResult && (
         <div className="team-solo-battle-result fade-in-result">
-          <h3>{battleWinner}</h3>
+          <h3>{battleWinner} WINS</h3>
           <p>{faintedPokemon} has fainted!</p>
           <p className="press-b-text">
             Press <span className="press-b">(B)</span> to return

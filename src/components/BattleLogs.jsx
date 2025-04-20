@@ -56,30 +56,47 @@ const BattleLogs = () => {
                 <p><strong>Battle {index + 1}</strong></p>
                 <p>Winner: {log.winner}</p>
                 <div className="pokemon-info">
-                  {pokemonSprites[log.winnerPokemon] && (
-                    <div className="pokemon-item">
-                      <img
-                        src={pokemonSprites[log.winnerPokemon]}
-                        alt={log.winnerPokemon}
-                        className="pokemon-sprite"
-                      />
-                      <p>Winner Pokémon: {log.winnerPokemon}</p>
-                    </div>
+                  {log.winner === "Draw" ? (
+                    <>
+                      {log.winnerPokemon.split(', ').map((pokemon, i) => (
+                        pokemonSprites[pokemon] && (
+                          <div key={i} className="pokemon-item">
+                            <img
+                              src={pokemonSprites[pokemon]}
+                              alt={pokemon}
+                              className="pokemon-sprite"
+                            />
+                            <p>Fainted</p>
+                          </div>
+                        )
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      {pokemonSprites[log.winnerPokemon] && (
+                        <div className="pokemon-item">
+                          <img
+                            src={pokemonSprites[log.winnerPokemon]}
+                            alt={log.winnerPokemon}
+                            className="pokemon-sprite"
+                          />
+                          <p>Winner Pokémon: {log.winnerPokemon}</p>
+                        </div>
+                      )}
+                      {pokemonSprites[log.faintedPokemon] && (
+                        <div className="pokemon-item">
+                          <img
+                            src={pokemonSprites[log.faintedPokemon]}
+                            alt={log.faintedPokemon}
+                            className="pokemon-sprite"
+                          />
+                          <p>Fainted Pokémon: {log.faintedPokemon}</p>
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
-                <br></br><br></br>
-                <div className="pokemon-info">
-                  {pokemonSprites[log.faintedPokemon] && (
-                    <div className="pokemon-item">
-                      <img
-                        src={pokemonSprites[log.faintedPokemon]}
-                        alt={log.faintedPokemon}
-                        className="pokemon-sprite"
-                      />
-                      <p>Fainted Pokémon: {log.faintedPokemon}</p>
-                    </div>
-                  )}
-                </div>
+                <br /><br />
               </div>
             ))
           )}
