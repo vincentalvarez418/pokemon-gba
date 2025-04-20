@@ -60,7 +60,7 @@ const PlayerName = () => {
           localStorage.setItem("playerName", existingPlayer.name);
           setPlayerId(existingPlayer.id);
           setName(existingPlayer.name);
-          navigate("/menu");
+          navigate("/avatar");
           return;
         }
   
@@ -77,7 +77,7 @@ const PlayerName = () => {
         }
   
         localStorage.setItem("playerName", name);
-        navigate("/menu");
+        navigate("/avatar");
       } catch (error) {
         console.error("Error saving player entry:", error);
       }

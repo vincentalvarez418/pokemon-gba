@@ -4,6 +4,7 @@ import Gameboy from "./components/Gameboy";
 import PlayerName from "./components/PlayerName";
 import Menu from "./components/Menu";
 import Lobby from "./components/Lobby";  
+import AvatarSelect from "./components/AvatarSelect";
 import SoloBattle from './components/SoloBattle';
 import BattleView from './components/BattleView';
 import Pokedex from './components/Pokedex'; 
@@ -31,6 +32,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Gameboy />}>
+          <Route path="/avatar" element={<AvatarSelect />} />
             <Route path="playername" element={<PlayerName />} />
             <Route path="menu" element={<Menu />} />
             <Route path="lobby" element={<Lobby />} /> 
