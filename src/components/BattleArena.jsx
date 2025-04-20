@@ -3,6 +3,7 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/BattleArena.css';
+import { playBattleTheme, stopBattleTheme } from "./battleAudio";
 
 const BattleArena = () => {
   const { battleId } = useParams();
@@ -32,6 +33,11 @@ const BattleArena = () => {
       speed: data.stats.find(stat => stat.stat.name === "speed").base_stat,
     };
   };
+  
+  useEffect(() => {
+    playBattleTheme();
+    return () => stopBattleTheme();
+  }, []);
 
   useEffect(() => {
     const fetchReadinessData = async () => {
@@ -84,6 +90,8 @@ const BattleArena = () => {
       setBattleComplete(savedState.battleComplete || false);
     }
   }, []);
+
+  
 
   const handleFight = () => {
     if (playerPokemons.length === 0 || opponentPokemons.length === 0) {
