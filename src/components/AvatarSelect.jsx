@@ -63,22 +63,30 @@ const AvatarSelect = () => {
 
   const handleSubmit = async () => {
     const playerId = localStorage.getItem("playerId");
-
+  
     try {
-      await fetch(`${apiUrl}/players/${playerId}`, {
+      const res = await fetch(`${apiUrl}/players/${playerId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ avatar: selectedAvatar }),
       });
-
+  
+      if (!res.ok) {
+        throw new Error("Failed to save avatar");
+      }
+  
+      const updatedPlayer = await res.json(); 
+      console.log(updatedPlayer);
+  
       localStorage.setItem("playerAvatar", selectedAvatar);
       navigate("/menu");
     } catch (error) {
       console.error("Failed to save avatar:", error);
     }
   };
+  
 
 
   const getAvatarImage = (avatarName) => {
