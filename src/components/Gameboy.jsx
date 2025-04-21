@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // Add this import
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import BattleLogicModal from "./BattleLogicModal";
@@ -7,14 +7,13 @@ import startImage from '../assets/start.gif';
 
 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-const Gameboy = () => {
-  const [altBackground, setAltBackground] = useState(false);
+const Gameboy = ({ altBackground, setAltBackground }) => {
   const location = useLocation();
   const [tiltEffect, setTiltEffect] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReturnTextVisible, setIsReturnTextVisible] = useState(false);
   const [canPressB, setCanPressB] = useState(true);
-  const [refreshBattleView, setRefreshBattleView] = useState(false); 
+  const [refreshBattleView, setRefreshBattleView] = useState(false);
   const navigate = useNavigate();
 
   const isHome = location.pathname === "/";
@@ -51,7 +50,6 @@ const Gameboy = () => {
       case "a":
         if (location.pathname === "/") {
           setAltBackground((prev) => !prev);
-          document.body.classList.toggle("alt-bg"); 
         }
 
         setTiltEffect("tilt-left");
@@ -70,44 +68,44 @@ const Gameboy = () => {
             console.log("Faint slots wiped successfully!");
 
             setTimeout(() => {
-              setRefreshBattleView((prev) => !prev); 
-              setTiltEffect(""); 
-            }, 1000); 
+              setRefreshBattleView((prev) => !prev);
+              setTiltEffect("");
+            }, 1000);
           } catch (error) {
             console.error("Error wiping faint slots:", error);
           }
         }
         break;
 
-        case "b":
-          if (canPressB) {
-            if (location.pathname === "/avatar") {
-              navigate("/playername");
-            } else if (location.pathname === "/battle") {
-              navigate("/solo-battle");
-            } else if (location.pathname === "/pokebattle") {
-              navigate("/battle");
-            } else if (location.pathname === "/solo-battle") {
-              navigate("/lobby");
-            } else if (location.pathname === "/lobby") {
-              navigate("/");
-            } else if (location.pathname === "/battle-logs") {
-              navigate("/lobby");
-            } else if (location.pathname === "/qr-battle/host") {
-              navigate("/qr-battle");
-            } else if (location.pathname === "/qr-battle/join") {
-              navigate("/qr-battle");
-            } else if (location.pathname === "/qr-battle") {
-              navigate("/lobby");
-            } else if (location.pathname === "/qr-battle/history") {
-              navigate("/qr-battle");
-            } else if (
-              ["/playername", "/menu", "/pokedex"].includes(location.pathname)
-            ) {
-              navigate(-1);
-            }
+      case "b":
+        if (canPressB) {
+          if (location.pathname === "/avatar") {
+            navigate("/playername");
+          } else if (location.pathname === "/battle") {
+            navigate("/solo-battle");
+          } else if (location.pathname === "/pokebattle") {
+            navigate("/battle");
+          } else if (location.pathname === "/solo-battle") {
+            navigate("/lobby");
+          } else if (location.pathname === "/lobby") {
+            navigate("/");
+          } else if (location.pathname === "/battle-logs") {
+            navigate("/lobby");
+          } else if (location.pathname === "/qr-battle/host") {
+            navigate("/qr-battle");
+          } else if (location.pathname === "/qr-battle/join") {
+            navigate("/qr-battle");
+          } else if (location.pathname === "/qr-battle") {
+            navigate("/lobby");
+          } else if (location.pathname === "/qr-battle/history") {
+            navigate("/qr-battle");
+          } else if (
+            ["/playername", "/menu", "/pokedex"].includes(location.pathname)
+          ) {
+            navigate(-1);
           }
-          break;        
+        }
+        break;
       default:
         setTiltEffect("");
         break;
@@ -124,19 +122,18 @@ const Gameboy = () => {
     <div className={`gameboy-shell ${tiltEffect}`}>
       <div className="gameboy-screen">
         <div className="screen-inner">
-        {isHome ? (
-          <div className="retro-title-container">
-            <h1 className="retro-title">POKEMON SPINEL</h1>
-            <img src={startImage} alt="Start" className="start-image" />
-            <br></br> <br></br> 
-            <p className="press-start">PRESS START</p>
+          {isHome ? (
+            <div className="retro-title-container">
+              <h1 className="retro-title">POKEMON SPINEL</h1>
+              <img src={startImage} alt="Start" className="start-image" />
+              <br></br> <br></br>
+              <p className="press-start">PRESS START</p>
 
-            <p className="press-a">(A) | TOGGLE UI BACKGROUND</p>
-
-          </div>
-        ) : (
-          <Outlet />
-        )}
+              <p className="press-a">(A) | TOGGLE UI BACKGROUND</p>
+            </div>
+          ) : (
+            <Outlet />
+          )}
           {location.pathname === "/pokebattle" && isReturnTextVisible && (
             <div className="return-text"></div>
           )}
@@ -144,14 +141,19 @@ const Gameboy = () => {
       </div>
 
       <div className="system-buttons">
-        {isHome && (
-          <Link to="/playername">
-            <button className="sys-button" onClick={() => handleButtonClick("a")}>
-              START
-            </button>
-          </Link>
-        )}
-      </div>
+  {isHome && (
+    <button
+      className="sys-button"
+      onClick={() => {
+        navigate("/playername");  
+      }}
+    >
+      START
+    </button>
+  )}
+</div>
+
+
 
       <div className="gameboy-label">POKEMON SIM GEN 1</div>
       <div className="speaker-grill">
@@ -161,14 +163,13 @@ const Gameboy = () => {
       </div>
 
       <div className="gameboy-controls">
-      <div className="dpad">
-        <div className="dpad-btn up" onClick={() => handleButtonClick("up")}>▲</div>
-        <div className="dpad-btn down" onClick={() => handleButtonClick("down")}>▼</div>
-        <div className="dpad-btn left" onClick={() => handleButtonClick("left")}>◄</div>
-        <div className="dpad-btn right" onClick={() => handleButtonClick("right")}>►</div>
-        <div className="dpad-center">✖</div>
-      </div>
-
+        <div className="dpad">
+          <div className="dpad-btn up" onClick={() => handleButtonClick("up")}>▲</div>
+          <div className="dpad-btn down" onClick={() => handleButtonClick("down")}>▼</div>
+          <div className="dpad-btn left" onClick={() => handleButtonClick("left")}>◄</div>
+          <div className="dpad-btn right" onClick={() => handleButtonClick("right")}>►</div>
+          <div className="dpad-center">✖</div>
+        </div>
 
         <div className="bottom-accents">
           <div className="accent red"></div>

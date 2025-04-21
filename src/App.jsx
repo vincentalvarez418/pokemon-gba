@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Gameboy from "./components/Gameboy";
 import PlayerName from "./components/PlayerName";
@@ -21,36 +21,49 @@ import HomeAnimations from './components/HomeAnimations';
 import RenderPinger from "./components/RenderPinger";
 
 function App() {
+  const [altBackground, setAltBackground] = useState(() => {
+    return localStorage.getItem("altBackground") === "true";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("altBackground", altBackground.toString());
+    if (altBackground) {
+      document.body.classList.add("alt-bg");
+    } else {
+      document.body.classList.remove("alt-bg");
+    }
+  }, [altBackground]);
+
   useEffect(() => {
     document.body.style.zoom = "90%";
-  }, []); 
+  }, []);
 
   return (
     <>
       <RenderPinger>
-      <HomeAnimations />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Gameboy />}>
-          <Route path="/avatar" element={<AvatarSelect />} />
-            <Route path="playername" element={<PlayerName />} />
-            <Route path="menu" element={<Menu />} />
-            <Route path="lobby" element={<Lobby />} /> 
-            <Route path="/solo-battle" element={<SoloBattle />} />
-            <Route path="battle" element={<BattleView />} />
-            <Route path="pokedex" element={<Pokedex />} /> 
-            <Route path="pokebattle" element={<Pokebattle />} />
-            <Route path="/battle-logs" element={<BattleLogs />} />
-            <Route path="/qr-battle/host" element={<QRHostBattle />} />
-            <Route path="/qr-battle" element={<QRBattle />} />
-            <Route path="/qr-battle/join" element={<QRJoinBattle />} />
-            <Route path="/battleRoom/:battleId" element={<BattleRoom />} />
-            <Route path="/battlearena/:battleId" element={<BattleArena />} />
-            <Route path="/pokemon-selection/:battleId" element={<PokemonSelection />} />
-            <Route path="/qr-battle/history" element={<QRHistory />} />
-          </Route>
-        </Routes>
-      </Router>
+        <HomeAnimations />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Gameboy altBackground={altBackground} setAltBackground={setAltBackground} />}>
+              <Route path="/avatar" element={<AvatarSelect />} />
+              <Route path="playername" element={<PlayerName />} />
+              <Route path="menu" element={<Menu />} />
+              <Route path="lobby" element={<Lobby />} /> 
+              <Route path="/solo-battle" element={<SoloBattle />} />
+              <Route path="battle" element={<BattleView />} />
+              <Route path="pokedex" element={<Pokedex />} /> 
+              <Route path="pokebattle" element={<Pokebattle />} />
+              <Route path="/battle-logs" element={<BattleLogs />} />
+              <Route path="/qr-battle/host" element={<QRHostBattle />} />
+              <Route path="/qr-battle" element={<QRBattle />} />
+              <Route path="/qr-battle/join" element={<QRJoinBattle />} />
+              <Route path="/battleRoom/:battleId" element={<BattleRoom />} />
+              <Route path="/battlearena/:battleId" element={<BattleArena />} />
+              <Route path="/pokemon-selection/:battleId" element={<PokemonSelection />} />
+              <Route path="/qr-battle/history" element={<QRHistory />} />
+            </Route>
+          </Routes>
+        </Router>
       </RenderPinger>
     </>
   );
