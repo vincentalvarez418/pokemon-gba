@@ -289,5 +289,30 @@
     text-align: center;
   }
   
+  .pokemon-placeholder {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 2px solid #222;
+    border-radius: 4px;
+    color: #888;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  .pokemon-card img {
+    width: 50px;
+    height: 75px;
+    object-fit: contain;
+  }
+  
+  .pokemon-side h4 {
+    margin-bottom: 10px;
+  }
+  
 
 

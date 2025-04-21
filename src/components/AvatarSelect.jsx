@@ -95,9 +95,7 @@ const AvatarSelect = () => {
 
   return (
     <div className="avatar-select-screen">
-      <h2>Welcome, {playerName}!</h2>
-      <p>Select your avatar:</p>
-
+      <h2>SELECT AVATAR</h2>
       {}
       {selectedAvatar && (
         <div className="avatar-display-container">

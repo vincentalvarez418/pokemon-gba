@@ -290,7 +290,7 @@ const Pokebattle = () => {
       )}
 
       <div className="team-solo-pokemon-battle">
-        {/* Player Pokémon */}
+
         <div
           className={`team-solo-pokemon-side team-solo-player-side animated-slide-in-left ${attackClassPlayer} ${hitClassPlayer} ${showResult ? "no-animation" : ""}`}
         >
@@ -306,12 +306,11 @@ const Pokebattle = () => {
           <p>Speed: {playerDetails?.stats?.find((stat) => stat.stat.name === "speed")?.base_stat}</p>
         </div>
 
-        {/* VS Label */}
         <div className="team-solo-vs-container">
           <h2>VS</h2>
         </div>
 
-        {/* Opponent Pokémon */}
+
         <div
           className={`team-solo-pokemon-side team-solo-opponent-side animated-slide-in-right ${attackClassOpponent} ${hitClassOpponent} ${showResult ? "no-animation" : ""}`}
         >
@@ -330,8 +329,12 @@ const Pokebattle = () => {
 
       {showResult && (
         <div className="team-solo-battle-result fade-in-result">
-          <h3>{battleWinner} WINS</h3>
-          <p>{faintedPokemon} has fainted!</p>
+          <h3>
+            <span  className="wins-text">{battleWinner} WINS</span>
+          </h3>
+          <p>
+            <span className="fainted-text">{faintedPokemon}</span> has fainted!
+          </p>
           <p className="press-b-text">
             Press <span className="press-b">(B)</span> to return
           </p>

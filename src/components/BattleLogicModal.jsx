@@ -18,7 +18,7 @@ const BattleLogicModal = ({ isOpen, onClose }) => {
           Win 2 out of 3 to be the WINNER.
         </p>
         <br></br>
-        <button onClick={onClose}>Close</button>
+        <button onClick={onClose}>CLOSE</button>
       </div>
     </div>
   );

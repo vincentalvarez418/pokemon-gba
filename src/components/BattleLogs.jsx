@@ -46,10 +46,10 @@ const BattleLogs = () => {
   return (
     <div className="lobby2-gameboy-screen">
       <div className="lobby2-battle-screen">
-        <h1>Battle Logs</h1>
+        <h1>BATTLE LOG</h1>
         <div className="battle-log-list">
           {battleLogs.length === 0 ? (
-            <p>No battle logs available</p>
+            <p>NO BATTLE LOG AVAILABLE..</p>
           ) : (
             battleLogs.map((log, index) => (
               <div key={log.id} className="battle-log-item">

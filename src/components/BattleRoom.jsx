@@ -95,12 +95,26 @@ const BattleRoom = () => {
             </li>
           </ul>
           {(isLeader || isChallenger) && (
-            <button
-              onClick={handleReady}
-              disabled={isLeader ? readyStatus.leader : readyStatus.challenger}
-            >
-              Ready
-            </button>
+           <button
+           onClick={handleReady}
+           disabled={isLeader ? readyStatus.leader : readyStatus.challenger}
+           style={{
+             backgroundColor:
+               (isLeader && readyStatus.leader) || (isChallenger && readyStatus.challenger)
+                 ? "#ff3c3c" 
+                 : "#0078d7",
+             color: "#fff",
+             padding: "10px 20px",
+             border: "none",
+             borderRadius: "6px",
+             cursor: "pointer",
+             fontWeight: "bold",
+           }}
+         >
+           {((isLeader && readyStatus.leader) || (isChallenger && readyStatus.challenger))
+             ? "Ready ✔"
+             : "Ready"}
+         </button>
           )}
         </div>
       )}

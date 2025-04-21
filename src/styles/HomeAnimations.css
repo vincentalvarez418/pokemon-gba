@@ -74,16 +74,11 @@
   
   @media (max-width: 767px) {
     .bulbasaur-gif {
-        bottom: -30px;
-        left: -150px;
-        width: 150px;
+      display: none !important;
     }
 
     .pikachu-gif {
-        bottom: 710px;
-        left: -150px;
-        width: 180px;
-        z-index: -1;
+      display: none !important;
     }
 
     .bird-gif {

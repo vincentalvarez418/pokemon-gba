@@ -13,7 +13,7 @@ const SoloBattle = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-  // Function to save opponent team to database
+
   const saveOpponentTeamToDatabase = async (team) => {
     try {
       const response = await fetch(`${apiUrl}/opponent-team`, {
@@ -100,7 +100,7 @@ const SoloBattle = () => {
     updatedOpponentTeam[index] = null;
     setOpponentTeam(updatedOpponentTeam);
     localStorage.setItem("opponentTeam", JSON.stringify(updatedOpponentTeam));
-    saveOpponentTeamToDatabase(updatedOpponentTeam); // Save to database
+    saveOpponentTeamToDatabase(updatedOpponentTeam); 
   };
 
   const handleContinue = () => {
@@ -115,7 +115,7 @@ const SoloBattle = () => {
   const handleClearOpponentTeam = () => {
     setOpponentTeam(Array(6).fill(null));
     localStorage.removeItem("opponentTeam");
-    removeOpponentTeamFromDatabase(); // Remove from database
+    removeOpponentTeamFromDatabase(); 
   };
 
   return (

@@ -19,6 +19,15 @@
   text-align: center;
 }
 
+.playername-input:hover,
+.add-to-team-button:hover,
+.continue-button:hover {
+  background-color: #e1e1e1 !important; 
+  color: #000 !important;
+  border-color: #999 !important;
+}
+
+
 .menu-content h2,
 .menu-content h3 {
   margin: 0.25rem 0;
@@ -43,20 +52,20 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  font-size: 8px;
+  font-size: 12px;
   font-family: 'Press Start 2P', cursive;
   text-transform: capitalize;
 }
 
 .remove-button {
   position: absolute;
-  top: 2px;
-  right: 4px;
-  background-color: #4caf50;
+  top: 5px;
+  left: 5px;
+  background-color: #ff3c3c;
   color: white;
   border: none;
   border-radius: 50%;
-  width: 18px;
+  width: 20px;
   height: 18px;
   font-size: 10px;
   cursor: pointer;
@@ -68,19 +77,48 @@
   transition: transform 0.1s ease;
 }
 
+.remove-button:hover {
+  background-color: #0096bb !important;
+  color: #000 !important;
+  border: 1px solid #999 !important;
+}
+
 .pokemon-image {
-  image-rendering: pixelated;
   width: 50px;
   height: 75px;
   object-fit: contain;
   margin-bottom: 0;
   margin-right: 0px;
-  filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
+  filter: none !important;
+
 }
 
 
 .remove-button:active {
   transform: scale(0.95);
+}
+
+.clear-team-button {
+  color: rgb(165, 165, 165);
+  background-color: #0e0600; 
+  border: 2px solid #222;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-family: 'Press Start 2P', cursive;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform 0.1s ease;
+}
+
+.clear-team-button:active {
+  transform: scale(0.95); 
+}
+
+.clear-team-button:hover {
+  background-color: #414141 !important;
+  color: black !important;
+  border-color: #999 !important;
 }
 
 .pokemon-dropdown {
@@ -95,7 +133,15 @@
   overflow-y: auto;
   position: relative;
   z-index: 2;
+  border: 3px solid #222; 
 }
+
+.pokemon-dropdown:focus {
+  outline: none; 
+  border-color: #0096bb;
+  background-color: #f0f0f0; 
+}
+
 
 select option {
   height: 5px;
@@ -118,19 +164,20 @@ select {
 .continue-button {
   color: black;
   border: none;
+  font-weight: bold;
   border-radius: 4px;
   padding: 4px 8px;
-  font-size: 10px;
+  font-size: 20px;
   cursor: pointer;
   transition: transform 0.1s ease;
 }
 
 .add-to-team-button {
-  background-color: #a4d9a4;
+  background-color: #0096bb;
 }
 
 .continue-button {
-  background-color: #a4d9a4;
+  background-color: #ff3c3c;
 }
 
 .add-to-team-button:active,
@@ -140,7 +187,7 @@ select {
 
 .add-to-team-button,
 .continue-button {
-  color: black;
+  color: rgb(255, 255, 255);
   border: 2px solid #222;
   border-radius: 4px;
   padding: 4px 8px;
@@ -158,9 +205,9 @@ select {
 }
 
 .dialog-content {
-  background-color: #a4d9a4;
-  color: #000;
-  border: 2px solid #030;
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid rgb(0, 0, 0);
   padding: 2rem;
   border-radius: 10px;
   font-family: "Courier New", monospace;
@@ -186,8 +233,8 @@ select {
 }
 
 .dialog-close-button {
-  background-color: #003300;
-  color: #a4d9a4;
+  background-color: #000000;
+  color: #ffffff;
   padding: 0.5rem 1rem;
   border: none;
   font-weight: bold;
@@ -199,5 +246,10 @@ select {
 
 body:has(.dialog-content) {
   overflow: hidden;
+}
+
+.dialog-close-button:hover {
+  background-color: #505050 !important;
+  color: #000 !important;
 }
 

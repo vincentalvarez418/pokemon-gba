@@ -121,7 +121,6 @@ const Menu = () => {
         <h2>Manage Team</h2>
 
         <div>
-          <h3>Your Team:</h3> <br></br> <br></br>
           <div className="team-container">
             {team.map((pokemon, index) => (
               <div key={index} className="pokemon-slot">

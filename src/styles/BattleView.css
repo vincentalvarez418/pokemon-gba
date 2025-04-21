@@ -62,12 +62,12 @@
 }
 
 .pokemon-card.selected {
-  border-color: #4caf50;
+  border-color: #0096bb !important;
   background-color: #e6ffe6;
 }
 
 .pokemon-card.selected {
-  border: 2px solid #4caf50;
+  border: 2px solid #0096bb !important;
   background-color: #e6ffe6;
 }
 
@@ -87,7 +87,7 @@
   font-size: 18px;
   text-align: center;
   font-weight: bold;
-  color: #105d00;
+  color: #ff3c3c !important;
   text-transform: uppercase;
   position: relative;
   z-index: 1;

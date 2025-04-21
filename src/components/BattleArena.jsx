@@ -168,6 +168,16 @@ const BattleArena = () => {
         JSON.stringify({ playerNickname, opponentNickname, isFighting: false, battleComplete: true })
       );
       setBattleComplete(true);
+      let countdown = 3;
+      const intervalId = setInterval(() => {
+        if (countdown === 0) {
+          clearInterval(intervalId);
+          navigate("/qr-battle/history"); 
+        } else {
+          toast.info(`Redirecting to history in ${countdown}...`, { autoClose: 1000 });
+          countdown -= 1;
+        }
+      }, 1000);
     } catch (error) {
       console.error(error);
     } finally {
@@ -199,44 +209,61 @@ const BattleArena = () => {
         </div>
       </div>
       <div className="battle-field">
-        <div className="pokemon-side">
-          <h4>TEAM:</h4>
-          {playerPokemons.length === 0 ? (
-            <p>No Pokémon selected yet.</p>
-          ) : (
-            playerPokemons.map((pokemon, i) => (
-              <div key={i} className="pokemon-card">
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonID}.png`}
-                  alt={pokemon.name}
-                  className="pokemon-image"
-                />
-                <h4>{pokemon.name}</h4>
-              </div>
-            ))
-          )}
-        </div>
-        <div className="vs-container">
-          <h2>VS</h2>
-        </div>
-        <div className="pokemon-side">
-          <h4>OPPONENT:</h4>
-          {opponentPokemons.length === 0 ? (
-            <p>Opponent has not selected Pokémon yet.</p>
-          ) : (
-            opponentPokemons.map((pokemon, i) => (
-              <div key={i} className="pokemon-card">
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonID}.png`}
-                  alt={pokemon.name}
-                  className="pokemon-image"
-                />
-                <h4>{pokemon.name}</h4>
-              </div>
-            ))
-          )}
-        </div>
+  <div className="pokemon-side">
+    <h4>TEAM:</h4>
+    {playerPokemons.length === 0 ? (
+      <div className="pokemon-placeholder">
+        <p>No Pokémon selected yet.</p>
       </div>
+    ) : (
+
+      [...playerPokemons, ...Array(6 - playerPokemons.length).fill(null)].map((pokemon, i) => (
+        <div key={i} className="pokemon-card">
+          {pokemon ? (
+            <>
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonID}.png`}
+                alt={pokemon.name}
+                className="pokemon-image"
+              />
+            </>
+          ) : (
+            <div className="empty-slot">EMPTY..</div> 
+          )}
+        </div>
+      ))
+    )}
+  </div>
+  <div className="vs-container">
+    <h2>VS</h2>
+  </div>
+  <div className="pokemon-side">
+    <h4>OPPONENT:</h4>
+    {opponentPokemons.length === 0 ? (
+      <div className="pokemon-placeholder">
+        <p>Opponent has not selected Pokémon yet.</p>
+      </div>
+    ) : (
+
+      [...opponentPokemons, ...Array(6 - opponentPokemons.length).fill(null)].map((pokemon, i) => (
+        <div key={i} className="pokemon-card">
+          {pokemon ? (
+            <>
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.pokemonID}.png`}
+                alt={pokemon.name}
+                className="pokemon-image"
+              />
+            </>
+          ) : (
+            <div className="empty-slot">EMPTY..</div> 
+          )}
+        </div>
+      ))
+    )}
+  </div>
+</div>
+
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
