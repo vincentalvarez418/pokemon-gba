@@ -9,7 +9,6 @@ const PokemonSelection = () => {
   const role = location.state?.role;
   const navigate = useNavigate(); 
 
-  const storageKey = `shuffle_${battleId}_${role}`;
   const [pokemonList, setPokemonList] = useState([]);
   const [selectedPokemons, setSelectedPokemons] = useState(() => {
     const storedPokemons = JSON.parse(localStorage.getItem(`selectedPokemons_${battleId}`));
@@ -22,12 +21,8 @@ const PokemonSelection = () => {
       { id: 6, pokemon: null }
     ];
   });
-  const [shufflesLeft, setShufflesLeft] = useState(() => {
-    const storedShuffles = localStorage.getItem(storageKey);
-    return storedShuffles ? parseInt(storedShuffles) : 3;
-  });
   const [dropdownVisible, setDropdownVisible] = useState(null);
-  const [hasShuffled, setHasShuffled] = useState(false);
+
   const [isReady, setIsReady] = useState(false);
   const [battleStatus, setBattleStatus] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,7 +46,6 @@ const PokemonSelection = () => {
         setBattleStatus(battleData);
         const player = battleData.players.find(p => p.role === role);
         if (player) {
-          setHasShuffled(battleData.readyStatus[role]);
           setShufflesLeft(battleData.readyStatus[role] ? 0 : 3);
         }
       }
@@ -214,7 +208,7 @@ const PokemonSelection = () => {
 
         {!isReady ? (
           <button className="ready-button" onClick={handleReady}>
-            Ready
+            READY
           </button>
         ) : (
           <button
@@ -223,68 +217,62 @@ const PokemonSelection = () => {
               state: { role }
             })}
           >
-            Enter Battle
+            ENTER BATTLE
           </button>
         )}
 
         <h2>Pokémon Selection for {role}</h2>
-        <h3>Choose Your Pokémon (6 Slots):</h3>
 
         <div className="pokemon-selection-grid">
           {selectedPokemons.map((slot, index) => (
             <div
-              key={slot.id}
-              className={`pokemon-selection-slot ${slot.pokemon ? 'filled' : ''}`}
-              onClick={() => index < 3 && setDropdownVisible(index)}
-            >
-              {slot.pokemon ? slot.pokemon.name : "Empty"}
-              {dropdownVisible === index && (
-                <select
-                  value={slot.pokemon?.name || ""}
-                  onChange={(e) =>
-                    handleSelectPokemon(
-                      index,
-                      pokemonList.find(p => p.name === e.target.value)
-                    )
-                  }
-                  autoFocus
-                >
-                  <option value="">Select a Pokémon</option>
-                  {pokemonList.map(pokemon => (
-                    <option key={pokemon.name} value={pokemon.name}>
-                      {pokemon.name}
-                    </option>
-                  ))}
-                </select>
-              )}
-            </div>
+            key={slot.id}
+            className={`pokemon-selection-slot ${slot.pokemon ? 'filled' : ''}`}
+            onClick={() => setDropdownVisible(index)}
+          >
+            {dropdownVisible === index ? (
+              <select
+                value={slot.pokemon?.name || ""}
+                onChange={(e) => {
+                  handleSelectPokemon(
+                    index,
+                    pokemonList.find(p => p.name === e.target.value)
+                  );
+                }}
+                onBlur={() => setDropdownVisible(null)} 
+                autoFocus
+              >
+                <option value="">Select a Pokémon</option>
+                {pokemonList.map(pokemon => (
+                  <option key={pokemon.name} value={pokemon.name}>
+                    {pokemon.name}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <span>{slot.pokemon ? slot.pokemon.name : "Empty"}</span>
+            )}
+          </div>
           ))}
         </div>
+        <div style={{ marginTop: '20px', position: 'relative', top: '10px' }}>
+  <div style={{ display: 'flex', gap: '5px', justifyContent: 'center' }}>
+    {selectedPokemons
+      .map((slot, index) => (
+        <img
+          key={slot.id || index} 
+          src={
+            slot.pokemon
+              ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonIdFromUrl(slot.pokemon.url)}.png`
+              : "https://i.imgur.com/qFmcbT0.png" 
+          }
+          alt={slot.pokemon ? slot.pokemon.name : "Empty Slot"}
+          className="pokemon-image"
+        />
+      ))}
+  </div>
+</div>
 
-        <div>
-          <button
-            className="pokemon-selection-button"
-            onClick={handleShuffle}
-            disabled={shufflesLeft <= 0 || hasShuffled}
-          >
-            Shuffle (Remaining: {shufflesLeft})
-          </button>
-        </div>
-
-        <div style={{ marginTop: '20px' }}>
-          <div style={{ display: 'flex', gap: '5px', justifyContent: 'center' }}>
-            {selectedPokemons
-              .filter(slot => slot.pokemon)
-              .map((slot, index) => (
-                <img
-                  key={slot.pokemon.pokemonID}
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getPokemonIdFromUrl(slot.pokemon.url)}.png`}
-                  alt={slot.pokemon.name}
-                  className="pokemon-image"
-                />
-              ))}
-          </div>
-        </div>
 
         {}
         <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>

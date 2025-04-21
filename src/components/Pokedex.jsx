@@ -69,7 +69,7 @@ const Pokedex = () => {
                       <img
                         src={pokemon.sprites.front_default}
                         alt={pokemon.name}
-                        className="pokemon-image"
+                        className="pokedex-pokemon-image"
                       />
                     </div>
                     <p className="pokemon-name">

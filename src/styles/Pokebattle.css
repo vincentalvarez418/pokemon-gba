@@ -25,12 +25,10 @@
   }
   
   .team-solo-pokemon-side img {
-    image-rendering: pixelated;
     width: 80px;
     height: 80px;
     object-fit: contain;
     margin-bottom: 10px;
-    filter: grayscale(100%) contrast(100%) brightness(50%) sepia(100%) hue-rotate(120deg);
     transition: transform 0.5s ease;
   }
   
@@ -55,17 +53,26 @@
     align-items: center;
     font-size: 20px;
     font-weight: bold;
-    color: #156103;
+    color: #000000;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
     margin: 0 4px;
   }
   
-  .team-solo-battle-result {
+  .team-solo-battle-result  {
     margin-top: 20px;
     font-size: 15px;
     font-weight: bold;
-    color: #156103;
+    color: #ff0000;
   }
+
+  .team-solo-battle-result {
+    text-transform: uppercase; 
+  }
+  
+  .team-solo-battle-result .press-b-text {
+    text-transform: none; 
+  }
+  
   
   @keyframes slide-in-left {
     from { transform: translateX(-100px); opacity: 0; }
@@ -212,7 +219,15 @@
     font-size: 14px;
     text-align: center;
     margin-top: 10px;
-    color: #156103;
+    color: #0078d7;
+  }
+
+  .wins-text {
+    color: black;
+  }
+  
+  .fainted-text {
+    color: red;
   }
   
   .press-b {

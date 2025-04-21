@@ -3,15 +3,30 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: #a4d9a4;
+  background-color: #ffffff !important;
   border-radius: 12px;
   padding: 20px;
+  scrollbar-width: none;
+}
+
+.lobby2-lobby-screen {
+  background-color: #ffffff !important;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 320px;
+  scrollbar-width: none;
+  height: auto;
+}
+
+.lobby2-lobby-screen::-webkit-scrollbar {
+  display: none; 
 }
 
 .lobby2-menu-screen {
   width: 320px;
   height: 200px;
-  background-color: #a4d9a4;
+  background-color: #ffffff !important;
   border: 4px solid #444;
   border-radius: 12px;
   padding: 20px;
@@ -26,7 +41,7 @@
 
 .lobby2-menu-content {
   font-family: 'Press Start 2P', cursive;
-  color: white;
+  color: white !important;
   text-align: center;
 }
 
@@ -36,31 +51,34 @@ h2 {
 
 .lobby2-button-group {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap; 
   gap: 8px;
-  align-items: center;
+  justify-content: center; 
+  align-items: center; 
 }
 
 .lobby2-battle-button {
-  width: 100%;
+  width: 120px;
+  height: 70px; 
   padding: 10px;
   font-size: 16px;
   font-family: 'Press Start 2P', cursive;
-  background-color: #a4d9a4;
+  background-color: rgb(255, 255, 255);
   color: rgb(64, 64, 64);
   border: 2px solid #444;
   border-radius: 5px;
   cursor: pointer;
   text-transform: uppercase;
+  font-weight: bold;
   transition: all 0.3s ease;
 }
 
 .lobby2-battle-button:hover {
-  background-color: #8fca8f;
+  background-color: #ffffff;
   transform: scale(1.05);
 }
 
 .lobby2-battle-button:focus {
   outline: none;
-  box-shadow: 0 0 8px 3px rgba(0, 255, 0, 0.7);
+  box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.7);
 }

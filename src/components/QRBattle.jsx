@@ -39,18 +39,19 @@ const QRBattle = () => {
 
   return (
     <div className="qr-battle-container">
-  <h2>QR Battle Screen</h2>
-  <p>Here you can start a battle using a QR code!</p>
+      <div className="qr-battle-entrance">
+          <h2>QR BATTLE</h2>
+        </div>
 
   <div className="qr-battle-buttons">
     <button className="qr-battle-button host" onClick={handleHostBattle}>
       <img src={qrIcon} alt="QR Code" className="qr-icon host-icon" />
-      <span>Host Battle</span>
+      <span>HOST</span>
     </button>
 
     <button className="qr-battle-button join" onClick={handleJoinBattle}>
       <img src={joinIcon} alt="Join Battle" className="qr-icon join-icon" />
-      <span>Join Battle</span>
+      <span>JOIN/SCAN</span>
     </button>
 
     <div className="qr-history-button-wrapper">

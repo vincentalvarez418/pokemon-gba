@@ -3,7 +3,7 @@ import { BrowserQRCodeReader } from '@zxing/library';
 import { useNavigate } from 'react-router-dom';
 
 const QRJoinBattle = () => {
-  const [data, setData] = useState('No result');
+  const [data, setData] = useState('PLEASE CONTINUE SCANNING');
   const videoRef = useRef(null);
   const navigate = useNavigate();
   const codeReader = new BrowserQRCodeReader();

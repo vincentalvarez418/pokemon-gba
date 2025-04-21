@@ -28,7 +28,7 @@ const Lobby = () => {
   return (
     <div className="lobby2-gameboy-screen">
       <div className="lobby2-lobby-screen">
-        <h1>PokeArena</h1> <br />
+        <h1>PokeLobby</h1>
         <div className="lobby2-button-group">
           <button className="lobby2-battle-button" onClick={handleSoloBattle}>
             V.S. AI

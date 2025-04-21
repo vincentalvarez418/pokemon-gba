@@ -3,10 +3,12 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import BattleLogicModal from "./BattleLogicModal";
 import "./../styles/Gameboy.css";
+import startImage from '../assets/start.gif';
 
 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 const Gameboy = () => {
+  const [altBackground, setAltBackground] = useState(false);
   const location = useLocation();
   const [tiltEffect, setTiltEffect] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,6 +49,11 @@ const Gameboy = () => {
         setTiltEffect("tilt-down");
         break;
       case "a":
+        if (location.pathname === "/") {
+          setAltBackground((prev) => !prev);
+          document.body.classList.toggle("alt-bg"); 
+        }
+
         setTiltEffect("tilt-left");
         if (location.pathname === "/battle") {
           try {
@@ -119,8 +126,13 @@ const Gameboy = () => {
         <div className="screen-inner">
         {isHome ? (
           <div className="retro-title-container">
-            <h1 className="retro-title">Pokemon Retro Edition</h1> <br></br> <br></br>
-            <p className="press-start">Press Start</p>
+            <h1 className="retro-title">POKEMON SPINEL</h1>
+            <img src={startImage} alt="Start" className="start-image" />
+            <br></br> <br></br> 
+            <p className="press-start">PRESS START</p>
+
+            <p className="press-a">(A) | TOGGLE UI BACKGROUND</p>
+
           </div>
         ) : (
           <Outlet />
@@ -135,13 +147,13 @@ const Gameboy = () => {
         {isHome && (
           <Link to="/playername">
             <button className="sys-button" onClick={() => handleButtonClick("a")}>
-              Start
+              START
             </button>
           </Link>
         )}
       </div>
 
-      <div className="gameboy-label">Pokemon SIM Gen 1</div>
+      <div className="gameboy-label">POKEMON SIM GEN 1</div>
       <div className="speaker-grill">
         {[...Array(5)].map((_, i) => (
           <div key={i} className="grill-line" onClick={handleGrillLineClick} />
@@ -149,13 +161,14 @@ const Gameboy = () => {
       </div>
 
       <div className="gameboy-controls">
-        <div className="dpad">
-          <div className="dpad-btn up" onClick={() => handleButtonClick("up")}></div>
-          <div className="dpad-btn down" onClick={() => handleButtonClick("down")}></div>
-          <div className="dpad-btn left" onClick={() => handleButtonClick("left")}></div>
-          <div className="dpad-btn right" onClick={() => handleButtonClick("right")}></div>
-          <div className="dpad-center"></div>
-        </div>
+      <div className="dpad">
+        <div className="dpad-btn up" onClick={() => handleButtonClick("up")}>▲</div>
+        <div className="dpad-btn down" onClick={() => handleButtonClick("down")}>▼</div>
+        <div className="dpad-btn left" onClick={() => handleButtonClick("left")}>◄</div>
+        <div className="dpad-btn right" onClick={() => handleButtonClick("right")}>►</div>
+        <div className="dpad-center">✖</div>
+      </div>
+
 
         <div className="bottom-accents">
           <div className="accent red"></div>
@@ -170,7 +183,9 @@ const Gameboy = () => {
           <div
             className="button b"
             onClick={() => handleButtonClick("b")}
-            style={{ pointerEvents: canPressB ? "auto" : "none" }}
+            style={{
+              pointerEvents: canPressB ? "auto" : "none"
+            }}
           >
             B
           </div>
