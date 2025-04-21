@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/RenderPinger.css";
 
-import sprite1 from "../pingersprites/1.png";
-import sprite2 from "../pingersprites/2.png";
-import sprite3 from "../pingersprites/3.png";
-import sprite4 from "../pingersprites/4.png";
+import dancingGif from "../pingersprites/dancing.gif"; 
 
 const RenderPinger = ({ children }) => {
   const [serverUp, setServerUp] = useState(false);
@@ -17,7 +14,7 @@ const RenderPinger = ({ children }) => {
     if (!lastConnected) return false;
 
     const timeElapsed = Date.now() - parseInt(lastConnected);
-    return timeElapsed < 15 * 60 * 1000; // 15 minutes in milliseconds
+    return timeElapsed < 15 * 60 * 1000; 
   };
 
   const pingServer = async () => {
@@ -81,10 +78,7 @@ const RenderPinger = ({ children }) => {
             {statusMessage}{dots}
           </p>
           <div className="pinger-sprites-container">
-            <img src={sprite1} alt="Pinger Sprite 1" className="pinger-sprite" />
-            <img src={sprite2} alt="Pinger Sprite 2" className="pinger-sprite" />
-            <img src={sprite3} alt="Pinger Sprite 3" className="pinger-sprite" />
-            <img src={sprite4} alt="Pinger Sprite 4" className="pinger-sprite" />
+            <img src={dancingGif} alt="Dancing Pokémon" className="pinger-sprite" />
           </div>
         </div>
       </div>
