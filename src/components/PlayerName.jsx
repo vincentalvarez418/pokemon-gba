@@ -43,6 +43,15 @@ const PlayerName = () => {
     }
   }, [playerId]);
 
+  useEffect(() => {
+    localStorage.removeItem("playerName");
+    localStorage.removeItem("playerId");
+    const newPlayerId = uuidv4();
+    localStorage.setItem("playerId", newPlayerId);
+    setPlayerId(newPlayerId);
+  }, []);
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   

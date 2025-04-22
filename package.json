@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"vite\" \"json-server db.json --port 3000\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -16,6 +16,7 @@
     "@yudiel/react-qr-scanner": "^2.2.1",
     "@zxing/library": "^0.21.3",
     "axios": "^1.8.4",
+    "concurrently": "^9.1.2",
     "html5-qrcode": "^2.3.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

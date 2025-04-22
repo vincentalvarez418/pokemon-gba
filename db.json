@@ -1,48 +1,31 @@
 {
   "players": [
     {
-      "id": "6642bcf4-7697-4fb7-be56-3fd87748d887",
-      "name": "was"
+      "id": "34745262-d553-4714-af5a-7b661d6510ee",
+      "name": "comm",
+      "avatar": "Red"
     },
     {
-      "id": "6642bcf4-7697-4fb7-be56-3fd87748d887",
-      "name": "wise"
-    },
-    {
-      "id": "6642bcf4-7697-4fb7-be56-3fd87748d887",
-      "name": "wasw"
-    },
-    {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asdasd"
-    },
-    {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asdasda"
-    },
-    {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asdadsd"
-    },
-    {
-      "id": "885868fd-6f97-477d-a934-dc071e66b777",
-      "name": "asdad"
-    },
-    {
-      "id": "3339e093-bb13-41fc-852c-14089f51fc3b",
-      "name": "sd"
-    },
-    {
-      "id": "fe218d9d-abe0-4885-81d4-edb0386165b7",
-      "name": "asd"
+      "id": "e92edb9a-aa24-45bc-ab06-f6202e6798a2",
+      "name": "Johnny"
     }
   ],
   "team": [
     {
       "id": "1",
       "team": [
-        null,
-        null,
+        {
+          "name": "caterpie",
+          "id": 10,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/10/"
+        },
+        {
+          "name": "caterpie",
+          "id": 10,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/10/"
+        },
         null,
         null,
         null,
@@ -50,7 +33,27 @@
       ]
     }
   ],
-  "temporarybattlelog": [],
+  "temporarybattlelog": [
+    {
+      "id": "71cc",
+      "winner": "AI",
+      "winnerPokemon": "beedrill",
+      "faintedPokemon": "caterpie",
+      "winnerSlot": "enemySlot2",
+      "faintedSlot": "myTeamSlot2",
+      "timestamp": "2025-04-22T12:48:28.630Z"
+    },
+    {
+      "id": "b700",
+      "winner": "AI",
+      "winnerPokemon": "beedrill",
+      "faintedPokemon": "caterpie",
+      "winnerSlot": "enemySlot1",
+      "faintedSlot": "myTeamSlot2",
+      "playerName": "Jeff",
+      "timestamp": "2025-04-22T13:08:38.336Z"
+    }
+  ],
   "battles": [
     {
       "id": "1",
@@ -1051,15 +1054,64 @@
     }
   ],
   "faintslots": [
-    
-  ]
-  ,
-    "opponent-team": {
-      "team": []
+    {
+      "id": "8fa3",
+      "winnerSlot": "enemySlot1",
+      "faintedSlot": "myTeamSlot2",
+      "timestamp": "2025-04-22T13:08:38.232Z"
+    }
+  ],
+  "opponent-team": {
+    "team": [
+      {
+        "name": "beedrill",
+        "url": "https://pokeapi.co/api/v2/pokemon/15/",
+        "id": "15"
+      },
+      {
+        "name": "beedrill",
+        "url": "https://pokeapi.co/api/v2/pokemon/15/",
+        "id": "15"
+      },
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "pings": [
+    {
+      "id": "c12f",
+      "time": "2025-04-22T11:14:16.588Z"
     },
-    "pings": []
-    ,
-    "avatars": []
-  
-  
+    {
+      "id": "472a",
+      "time": "2025-04-22T11:32:53.127Z"
+    },
+    {
+      "id": "39c1",
+      "time": "2025-04-22T11:33:14.876Z"
+    },
+    {
+      "id": "991c",
+      "time": "2025-04-22T12:10:03.604Z"
+    },
+    {
+      "id": "68c0",
+      "time": "2025-04-22T12:26:56.779Z"
+    },
+    {
+      "id": "b1bc",
+      "time": "2025-04-22T12:31:07.387Z"
+    },
+    {
+      "id": "a966",
+      "time": "2025-04-22T12:46:34.065Z"
+    },
+    {
+      "id": "7f19",
+      "time": "2025-04-22T13:04:01.686Z"
+    }
+  ],
+  "avatars": []
 }

@@ -9,7 +9,6 @@ import Irida from "../components/trainersprites/irida.png";
 import Lusamine from "../components/trainersprites/lusamine.png";
 import Red from "../components/trainersprites/red.png";
 
-
 const avatarImages = {
   Red: Red,
   Blue: Blue,
@@ -27,7 +26,6 @@ const AvatarSelect = () => {
 
   const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-
   useEffect(() => {
     const storedName = localStorage.getItem("playerName");
     const playerId = localStorage.getItem("playerId");
@@ -39,7 +37,6 @@ const AvatarSelect = () => {
 
     setPlayerName(storedName);
 
- 
     const fetchPlayer = async () => {
       try {
         const res = await fetch(`${apiUrl}/players/${playerId}`);
@@ -63,7 +60,12 @@ const AvatarSelect = () => {
 
   const handleSubmit = async () => {
     const playerId = localStorage.getItem("playerId");
-  
+
+    if (selectedAvatar === currentAvatar) {
+      console.log("No change in avatar.");
+      return; 
+    }
+
     try {
       const res = await fetch(`${apiUrl}/players/${playerId}`, {
         method: "PATCH",
@@ -72,22 +74,21 @@ const AvatarSelect = () => {
         },
         body: JSON.stringify({ avatar: selectedAvatar }),
       });
-  
+
       if (!res.ok) {
         throw new Error("Failed to save avatar");
       }
-  
-      const updatedPlayer = await res.json(); 
+
+      const updatedPlayer = await res.json();
       console.log(updatedPlayer);
-  
+
       localStorage.setItem("playerAvatar", selectedAvatar);
+      setCurrentAvatar(selectedAvatar); 
       navigate("/menu");
     } catch (error) {
       console.error("Failed to save avatar:", error);
     }
   };
-  
-
 
   const getAvatarImage = (avatarName) => {
     return avatarImages[avatarName] || null;
@@ -96,7 +97,7 @@ const AvatarSelect = () => {
   return (
     <div className="avatar-select-screen">
       <h2>SELECT AVATAR</h2>
-      {}
+
       {selectedAvatar && (
         <div className="avatar-display-container">
           <img
@@ -107,7 +108,6 @@ const AvatarSelect = () => {
         </div>
       )}
 
-      {}
       <div className="avatar-button-row">
         {Object.keys(avatarImages).map((avatarName) => (
           <button
@@ -122,7 +122,6 @@ const AvatarSelect = () => {
         ))}
       </div>
 
-      {}
       {selectedAvatar && (
         <button className="avatar-next-button" onClick={handleSubmit}>
           NEXT

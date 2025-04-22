@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // Add this import
+import React, { useState, useEffect } from "react"; 
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import BattleLogicModal from "./BattleLogicModal";
@@ -88,7 +88,6 @@ const Gameboy = ({ altBackground, setAltBackground }) => {
           } else if (location.pathname === "/solo-battle") {
             navigate("/lobby");
           } else if (location.pathname === "/lobby") {
-            navigate("/");
           } else if (location.pathname === "/battle-logs") {
             navigate("/lobby");
           } else if (location.pathname === "/qr-battle/host") {
