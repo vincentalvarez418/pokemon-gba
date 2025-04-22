@@ -61,7 +61,7 @@ const DailyMotivation = () => {
             <h1>DAILY POKEMON: {pokemon.name.toUpperCase()}</h1>
             <img className="motivation-pokemon-img" src={pokemon.image} alt={pokemon.name} />
             <p>{quote}</p>
-            <br /><br /><br />
+            <br />
             <button className="hide-button" onClick={handleHideOverlay}>
               START
             </button>
