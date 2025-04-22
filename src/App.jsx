@@ -18,12 +18,18 @@ import QRHistory from "./components/QRHistory";
 import PokemonSelection from "./components/PokemonSelection";
 import BattleArena from './components/BattleArena';
 import HomeAnimations from './components/HomeAnimations';
+import DailyMotivation from './components/DailyMotivation';
 import RenderPinger from "./components/RenderPinger";
 
 function App() {
   const [altBackground, setAltBackground] = useState(() => {
     return localStorage.getItem("altBackground") === "true";
   });
+  const [showMotivation, setShowMotivation] = useState(true);
+
+  const hideMotivation = () => {
+    setShowMotivation(false); 
+  };
 
   useEffect(() => {
     localStorage.setItem("altBackground", altBackground.toString());
@@ -42,6 +48,11 @@ function App() {
     <>
       <RenderPinger>
         <HomeAnimations />
+        {showMotivation && (
+        <div className="center-container">
+          <DailyMotivation hideMotivation={hideMotivation} />
+        </div>
+      )}
         <Router>
           <Routes>
             <Route path="/" element={<Gameboy altBackground={altBackground} setAltBackground={setAltBackground} />}>
