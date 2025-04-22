@@ -8,24 +8,44 @@
     {
       "id": "e92edb9a-aa24-45bc-ab06-f6202e6798a2",
       "name": "Johnny"
+    },
+    {
+      "id": "9b1d460d-b524-49be-a9f0-5562c56a2fda",
+      "name": "Jison",
+      "avatar": "Red"
+    },
+    {
+      "id": "1adc63e1-b5bb-4a53-af8b-37179e12b49a",
+      "name": "red",
+      "avatar": "Blue"
+    },
+    {
+      "id": "aa9eeb83-e492-44b1-9482-a6661593464e",
+      "name": "3",
+      "avatar": "Irida"
+    },
+    {
+      "id": "9cc394c8-8c84-4520-831c-2da2f13b2f23",
+      "name": "asdas",
+      "avatar": "Irida"
+    },
+    {
+      "id": "8b837157-7b28-49b2-bc47-f2ab21819587",
+      "name": "Jeff",
+      "avatar": "Blue"
+    },
+    {
+      "id": "a47db9a7-ce68-4c14-9b17-de77563fa3ee",
+      "name": "asd",
+      "avatar": "Irida"
     }
   ],
   "team": [
     {
       "id": "1",
       "team": [
-        {
-          "name": "caterpie",
-          "id": 10,
-          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
-          "url": "https://pokeapi.co/api/v2/pokemon/10/"
-        },
-        {
-          "name": "caterpie",
-          "id": 10,
-          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
-          "url": "https://pokeapi.co/api/v2/pokemon/10/"
-        },
+        null,
+        null,
         null,
         null,
         null,
@@ -1111,6 +1131,14 @@
     {
       "id": "7f19",
       "time": "2025-04-22T13:04:01.686Z"
+    },
+    {
+      "id": "838d",
+      "time": "2025-04-22T13:27:54.473Z"
+    },
+    {
+      "id": "6d2a",
+      "time": "2025-04-22T13:43:01.961Z"
     }
   ],
   "avatars": []

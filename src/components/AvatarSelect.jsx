@@ -62,8 +62,7 @@ const AvatarSelect = () => {
     const playerId = localStorage.getItem("playerId");
 
     if (selectedAvatar === currentAvatar) {
-      console.log("No change in avatar.");
-      return; 
+      console.log("No change in avatar, but proceeding.");
     }
 
     try {

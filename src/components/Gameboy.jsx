@@ -77,34 +77,37 @@ const Gameboy = ({ altBackground, setAltBackground }) => {
         }
         break;
 
-      case "b":
-        if (canPressB) {
-          if (location.pathname === "/avatar") {
-            navigate("/playername");
-          } else if (location.pathname === "/battle") {
-            navigate("/solo-battle");
-          } else if (location.pathname === "/pokebattle") {
-            navigate("/battle");
-          } else if (location.pathname === "/solo-battle") {
-            navigate("/lobby");
-          } else if (location.pathname === "/lobby") {
-          } else if (location.pathname === "/battle-logs") {
-            navigate("/lobby");
-          } else if (location.pathname === "/qr-battle/host") {
-            navigate("/qr-battle");
-          } else if (location.pathname === "/qr-battle/join") {
-            navigate("/qr-battle");
-          } else if (location.pathname === "/qr-battle") {
-            navigate("/lobby");
-          } else if (location.pathname === "/qr-battle/history") {
-            navigate("/qr-battle");
-          } else if (
-            ["/playername", "/menu", "/pokedex"].includes(location.pathname)
-          ) {
-            navigate(-1);
+        case "b":
+          if (canPressB) {
+            if (location.pathname === "/avatar") {
+              navigate("/playername");
+            } else if (location.pathname === "/battle") {
+              navigate("/solo-battle");
+            } else if (location.pathname === "/pokebattle") {
+              navigate("/battle");
+            } else if (location.pathname === "/solo-battle") {
+              navigate("/lobby");
+            } else if (location.pathname === "/lobby") {
+            } else if (location.pathname === "/battle-logs") {
+              navigate("/lobby");
+            } else if (location.pathname === "/qr-battle/host") {
+              navigate("/qr-battle");
+            } else if (location.pathname === "/qr-battle/join") {
+              navigate("/qr-battle");
+            } else if (location.pathname === "/qr-battle") {
+              navigate("/lobby");
+            } else if (location.pathname === "/qr-battle/history") {
+              navigate("/qr-battle");
+            } else if (location.pathname === "/playername") {
+              navigate("/"); 
+            } else if (
+              ["/menu", "/pokedex"].includes(location.pathname)
+            ) {
+              navigate(-1);
+            }
           }
-        }
-        break;
+          break;
+        
       default:
         setTiltEffect("");
         break;
@@ -154,7 +157,7 @@ const Gameboy = ({ altBackground, setAltBackground }) => {
 
 
 
-      <div className="gameboy-label">POKEMON SIM GEN 1</div>
+      <div className="gameboy-label">SINGLE CARTRIDGE EDITION</div>
       <div className="speaker-grill">
         {[...Array(5)].map((_, i) => (
           <div key={i} className="grill-line" onClick={handleGrillLineClick} />
