@@ -44,9 +44,24 @@
     {
       "id": "1",
       "team": [
-        null,
-        null,
-        null,
+        {
+          "name": "blastoise",
+          "id": 9,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/9/"
+        },
+        {
+          "name": "blastoise",
+          "id": 9,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/9/"
+        },
+        {
+          "name": "weedle",
+          "id": 13,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/13/"
+        },
         null,
         null,
         null
@@ -1159,6 +1174,22 @@
     {
       "id": "ae9e",
       "time": "2025-04-22T16:11:46.458Z"
+    },
+    {
+      "id": "f453",
+      "time": "2025-04-23T00:23:52.699Z"
+    },
+    {
+      "id": "afe0",
+      "time": "2025-04-23T01:04:39.121Z"
+    },
+    {
+      "id": "f833",
+      "time": "2025-04-23T01:29:04.398Z"
+    },
+    {
+      "id": "5f55",
+      "time": "2025-04-23T01:47:01.486Z"
     }
   ],
   "avatars": []

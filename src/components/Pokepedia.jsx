@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./../styles/Pokepedia.css"; 
 
 const Pokepedia = () => {
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const navigate = useNavigate();
+
+    useEffect(() => {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+  
+      if (windowWidth <= 1000) {
+        navigate("/");
+      }
+  
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, [windowWidth, navigate]);
+
   return (
     <div className="pokepedia">
         <h1>What is Pokémon?</h1>
