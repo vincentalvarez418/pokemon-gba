@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Dialog from "@radix-ui/react-dialog";
 import "./../styles/SelectionMenu.css";
+import * as Select from "@radix-ui/react-select";
+import { ChevronDownIcon, CheckIcon } from "@radix-ui/react-icons";
 
 const SoloBattle = () => {
   const [opponentTeam, setOpponentTeam] = useState(Array(6).fill(null));
@@ -154,21 +156,45 @@ const SoloBattle = () => {
         </div>
 
         <h3>Select Pokémon:</h3>
-        <select
-          className="pokemon-dropdown"
-          value={selectedOpponentPokemon}
-          onChange={(e) => {
-            const selectedPokemon = pokemonList.find((p) => p.name === e.target.value);
-            setSelectedOpponentPokemon(e.target.value);
-            setSelectedOpponentPokemonId(selectedPokemon.url.split('/')[6]);
-          }}
-        >
-          {pokemonList.map((pokemon, index) => (
-            <option key={index} value={pokemon.name}>
-              {pokemon.name}
-            </option>
-          ))}
-        </select>
+        <Select.Root
+  value={selectedOpponentPokemon}
+  onValueChange={(value) => {
+    const selectedPokemon = pokemonList.find((p) => p.name === value);
+    setSelectedOpponentPokemon(value);
+    setSelectedOpponentPokemonId(selectedPokemon.url.split('/')[6]);
+  }}
+>
+  <Select.Trigger className="pokemon-dropdown" aria-label="Pokémon">
+    <Select.Value placeholder="Select Pokémon" />
+    <Select.Icon>
+      <ChevronDownIcon />
+    </Select.Icon>
+  </Select.Trigger>
+
+  <Select.Portal>
+    <Select.Content className="pokemon-dropdown">
+      <Select.ScrollUpButton />
+      <Select.Viewport>
+        {pokemonList.map((pokemon) => (
+          <Select.Item key={pokemon.name} value={pokemon.name} className="select-item">
+            <div className="select-item-content">
+              <img
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`}
+                alt={pokemon.name}
+                className="select-item-image"
+              />
+              <Select.ItemText>{pokemon.name}</Select.ItemText>
+              <Select.ItemIndicator>
+                <CheckIcon />
+              </Select.ItemIndicator>
+            </div>
+          </Select.Item>
+        ))}
+      </Select.Viewport>
+      <Select.ScrollDownButton />
+    </Select.Content>
+  </Select.Portal>
+</Select.Root>
         <br />
 
         <div className="button-group">

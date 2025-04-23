@@ -27,11 +27,21 @@ const Sidebar = () => {
           <Link to="/about" className={isSidebarActiveRoute ? '' : 'disabled-link'}>About Pokémon Spinel</Link>
         </li>
         <li>
-          <Link to="/findmon" className={isSidebarActiveRoute ? '' : 'disabled-link'}>Guess The Pokémon!</Link>
-        </li>
-        <li>
-          <a href="https://github.com/vincentalvarez418/pokemon-gba" target="_blank" rel="noopener noreferrer" className="github-link">Contribute on GitHub</a>
-        </li>
+        <Link to="/findmon" className={isSidebarActiveRoute ? '' : 'disabled-link'}>
+          Guess The Pokémon!
+        </Link>
+      </li>
+      <li>
+        <a 
+          href="https://github.com/vincentalvarez418/pokemon-gba" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={isSidebarActiveRoute ? 'github-link' : 'disabled-link'}
+        >
+          Contribute on GitHub
+        </a>
+      </li>
+
       </ul>
       <p className="disclaimer">
         This is a non-profit fan project created for educational and entertainment purposes only. Pokémon is a registered trademark of The Pokémon Company, Game Freak, and Nintendo.

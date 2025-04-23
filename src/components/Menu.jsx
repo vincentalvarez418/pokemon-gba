@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as Select from "@radix-ui/react-select";
+import { CheckIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import "../styles/SelectionMenu.css";
 
 const Menu = () => {
@@ -23,7 +25,7 @@ const Menu = () => {
             name: pokemon.name,
             id: pokemonData.id,
             sprite: pokemonData.sprites.front_default,
-            url: pokemon.url, 
+            url: pokemon.url,
           };
         }));
 
@@ -58,16 +60,16 @@ const Menu = () => {
   const handleAddPokemonToTeam = () => {
     const pokemon = pokemonList.find((p) => p.name === selectedPokemon);
     if (!pokemon) return;
-  
+
     const updatedTeam = [...team];
     const emptySlotIndex = updatedTeam.findIndex((p) => p === null);
-  
+
     if (emptySlotIndex !== -1) {
       updatedTeam[emptySlotIndex] = {
         name: pokemon.name,
         id: pokemon.id,
         sprite: pokemon.sprite,
-        url: pokemon.url, 
+        url: pokemon.url,
       };
       setTeam(updatedTeam);
     }
@@ -105,12 +107,10 @@ const Menu = () => {
 
   const handleContinue = async () => {
     const hasPokemon = team.some((p) => p !== null);
-
     if (!hasPokemon) {
       setOpenDialog(true);
       return;
     }
-
     await saveTeamToServer();
     navigate("/lobby");
   };
@@ -120,47 +120,66 @@ const Menu = () => {
       <div className="menu-content">
         <h2>Manage Team</h2>
 
-        <div>
-          <div className="team-container">
-            {team.map((pokemon, index) => (
-              <div key={index} className="pokemon-slot">
-                {pokemon ? (
-                  <>
-                    <img
-                      className="pokemon-image"
-                      src={pokemon.sprite}
-                      alt={pokemon.name}
-                    />
-                    <span>{pokemon.name}</span> 
-                  </>
-                ) : (
-                  `Slot ${index + 1}`
-                )}
-                {pokemon && (
-                  <button
-                    className="remove-button"
-                    onClick={() => handleRemovePokemonFromTeam(index)}
-                  >
-                    ✕
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
+        <div className="team-container">
+          {team.map((pokemon, index) => (
+            <div key={index} className="pokemon-slot">
+              {pokemon ? (
+                <>
+                  <img
+                    className="pokemon-image"
+                    src={pokemon.sprite}
+                    alt={pokemon.name}
+                  />
+                  <span>{pokemon.name}</span>
+                </>
+              ) : (
+                `Slot ${index + 1}`
+              )}
+              {pokemon && (
+                <button
+                  className="remove-button"
+                  onClick={() => handleRemovePokemonFromTeam(index)}
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+          ))}
         </div>
 
         <h3>Select Pokémon:</h3>
-        <select
-          className="pokemon-dropdown"
-          value={selectedPokemon}
-          onChange={(e) => setSelectedPokemon(e.target.value)}
-        >
-          {pokemonList.map((pokemon, index) => (
-            <option key={index} value={pokemon.name}>
-              {pokemon.name}
-            </option>
-          ))}
-        </select>
+        <Select.Root value={selectedPokemon} onValueChange={setSelectedPokemon}>
+  <Select.Trigger className="pokemon-dropdown" aria-label="Pokémon">
+    <Select.Value placeholder="Select Pokémon" />
+    <Select.Icon>
+      <ChevronDownIcon />
+    </Select.Icon>
+  </Select.Trigger>
+  <Select.Portal>
+    <Select.Content className="pokemon-dropdown">
+      <Select.ScrollUpButton />
+      <Select.Viewport>
+        {pokemonList.map((pokemon) => (
+          <Select.Item key={pokemon.name} value={pokemon.name} className="select-item">
+            <div className="select-item-content">
+              <img
+                src={pokemon.sprite}
+                alt={pokemon.name}
+                className="select-item-image"
+              />
+              <Select.ItemText>{pokemon.name}</Select.ItemText>
+              <Select.ItemIndicator>
+                <CheckIcon />
+              </Select.ItemIndicator>
+            </div>
+          </Select.Item>
+        ))}
+      </Select.Viewport>
+      <Select.ScrollDownButton />
+    </Select.Content>
+  </Select.Portal>
+</Select.Root>
+
 
         <div className="button-group">
           <button className="add-to-team-button" onClick={handleAddPokemonToTeam}>

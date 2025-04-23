@@ -37,7 +37,27 @@
     {
       "id": "a47db9a7-ce68-4c14-9b17-de77563fa3ee",
       "name": "asd",
-      "avatar": "Irida"
+      "avatar": "Blue"
+    },
+    {
+      "id": "8e6418eb-55d8-4c90-8a0d-1140854f9a18",
+      "name": "Kenneth",
+      "avatar": "Green"
+    },
+    {
+      "id": "30e950d0-6c1f-4d4c-84d7-0825cc903180",
+      "name": "Larry",
+      "avatar": "Red"
+    },
+    {
+      "id": "dfb1d027-93b5-40d8-b650-091b3c85cd9b",
+      "name": "sasd",
+      "avatar": "Red"
+    },
+    {
+      "id": "cdb1e106-94c1-43a5-a9b3-903014af0774",
+      "name": "John",
+      "avatar": "Blue"
     }
   ],
   "team": [
@@ -45,24 +65,29 @@
       "id": "1",
       "team": [
         {
-          "name": "blastoise",
-          "id": 9,
-          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
-          "url": "https://pokeapi.co/api/v2/pokemon/9/"
+          "name": "hypno",
+          "id": 97,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/97.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/97/"
         },
         {
-          "name": "blastoise",
-          "id": 9,
-          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
-          "url": "https://pokeapi.co/api/v2/pokemon/9/"
+          "name": "zapdos",
+          "id": 145,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/145.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/145/"
         },
         {
-          "name": "weedle",
-          "id": 13,
-          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
-          "url": "https://pokeapi.co/api/v2/pokemon/13/"
+          "name": "dragonite",
+          "id": 149,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/149/"
         },
-        null,
+        {
+          "name": "mewtwo",
+          "id": 150,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/150/"
+        },
         null,
         null
       ]
@@ -87,6 +112,46 @@
       "faintedSlot": "myTeamSlot2",
       "playerName": "Jeff",
       "timestamp": "2025-04-22T13:08:38.336Z"
+    },
+    {
+      "id": "6b2c",
+      "winner": "Player",
+      "winnerPokemon": "blastoise",
+      "faintedPokemon": "bulbasaur",
+      "winnerSlot": "myTeamSlot1",
+      "faintedSlot": "enemySlot1",
+      "playerName": "Kenneth",
+      "timestamp": "2025-04-23T03:35:18.531Z"
+    },
+    {
+      "id": "820e",
+      "winner": "Player",
+      "winnerPokemon": "pidgeotto",
+      "faintedPokemon": "bulbasaur",
+      "winnerSlot": "myTeamSlot1",
+      "faintedSlot": "enemySlot1",
+      "playerName": "Larry",
+      "timestamp": "2025-04-23T03:39:26.433Z"
+    },
+    {
+      "id": "d3d5",
+      "winner": "Player",
+      "winnerPokemon": "charizard",
+      "faintedPokemon": "bulbasaur",
+      "winnerSlot": "myTeamSlot1",
+      "faintedSlot": "enemySlot1",
+      "playerName": "John",
+      "timestamp": "2025-04-23T04:05:00.654Z"
+    },
+    {
+      "id": "c7bb",
+      "winner": "Player",
+      "winnerPokemon": "beedrill",
+      "faintedPokemon": "bulbasaur",
+      "winnerSlot": "myTeamSlot2",
+      "faintedSlot": "enemySlot2",
+      "playerName": "John",
+      "timestamp": "2025-04-23T04:05:20.802Z"
     }
   ],
   "battles": [
@@ -332,6 +397,40 @@
     {
       "id": "becb",
       "battleId": "battle-ypcyf1v3w",
+      "status": "joined",
+      "ready": {
+        "leader": true,
+        "challenger": true
+      },
+      "matchready": {
+        "leader": false,
+        "challenger": false
+      },
+      "leaderPokemons": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "challengerPokemons": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "d73b",
+      "battleId": "battle-nfue8zn5y",
+      "status": "waiting"
+    },
+    {
+      "id": "9015",
+      "battleId": "battle-j9g205o74",
       "status": "joined",
       "ready": {
         "leader": true,
@@ -787,6 +886,32 @@
           "name": "pidgey"
         }
       ]
+    },
+    {
+      "id": "1ce5",
+      "battleId": "battle-j9g205o74",
+      "role": "Challenger",
+      "readyStatus": true,
+      "timestamp": "2025-04-23T04:07:39.053Z",
+      "selectedPokemons": [
+        {
+          "pokemonID": "3",
+          "name": "venusaur"
+        }
+      ]
+    },
+    {
+      "id": "f094",
+      "battleId": "battle-j9g205o74",
+      "role": "Gym Leader",
+      "readyStatus": true,
+      "timestamp": "2025-04-23T04:07:40.153Z",
+      "selectedPokemons": [
+        {
+          "pokemonID": "1",
+          "name": "bulbasaur"
+        }
+      ]
     }
   ],
   "battleResults": [
@@ -1086,28 +1211,39 @@
       "winnerPokemon": "victreebel",
       "winnerTrainer": "michaek",
       "timestamp": "2025-04-17T05:40:44.154Z"
-    }
-  ],
-  "faintslots": [
+    },
     {
-      "id": "8fa3",
-      "winnerSlot": "enemySlot1",
-      "faintedSlot": "myTeamSlot2",
-      "timestamp": "2025-04-22T13:08:38.232Z"
+      "id": "6db0",
+      "battleId": "battle-j9g205o74",
+      "attacker": "venusaur",
+      "defender": "bulbasaur",
+      "attackerTrainer": "rey",
+      "defenderTrainer": "rey",
+      "winnerPokemon": "venusaur",
+      "winnerTrainer": "rey",
+      "timestamp": "2025-04-23T04:08:24.990Z"
+    },
+    {
+      "id": "dfa7",
+      "battleId": "battle-j9g205o74",
+      "attacker": "bulbasaur",
+      "defender": "venusaur",
+      "attackerTrainer": "rey",
+      "defenderTrainer": "rey",
+      "winnerPokemon": "venusaur",
+      "winnerTrainer": "rey",
+      "timestamp": "2025-04-23T04:08:30.021Z"
     }
   ],
+  "faintslots": [],
   "opponent-team": {
     "team": [
       {
-        "name": "beedrill",
-        "url": "https://pokeapi.co/api/v2/pokemon/15/",
-        "id": "15"
+        "name": "bulbasaur",
+        "url": "https://pokeapi.co/api/v2/pokemon/1/",
+        "id": "1"
       },
-      {
-        "name": "beedrill",
-        "url": "https://pokeapi.co/api/v2/pokemon/15/",
-        "id": "15"
-      },
+      null,
       null,
       null,
       null,
@@ -1190,6 +1326,38 @@
     {
       "id": "5f55",
       "time": "2025-04-23T01:47:01.486Z"
+    },
+    {
+      "id": "021b",
+      "time": "2025-04-23T03:32:40.421Z"
+    },
+    {
+      "id": "841a",
+      "time": "2025-04-23T03:50:25.666Z"
+    },
+    {
+      "id": "5099",
+      "time": "2025-04-23T04:05:48.172Z"
+    },
+    {
+      "id": "3ebb",
+      "time": "2025-04-23T04:16:24.173Z"
+    },
+    {
+      "id": "e556",
+      "time": "2025-04-23T04:40:03.054Z"
+    },
+    {
+      "id": "8578",
+      "time": "2025-04-23T04:56:03.169Z"
+    },
+    {
+      "id": "00e8",
+      "time": "2025-04-23T04:56:06.556Z"
+    },
+    {
+      "id": "fbc8",
+      "time": "2025-04-23T05:01:57.776Z"
     }
   ],
   "avatars": []
