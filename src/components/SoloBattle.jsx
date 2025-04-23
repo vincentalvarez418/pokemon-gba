@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Dialog from "@radix-ui/react-dialog";
 import "./../styles/SelectionMenu.css";
-import * as Select from "@radix-ui/react-select";
 import { ChevronDownIcon, CheckIcon } from "@radix-ui/react-icons";
 
 const SoloBattle = () => {
@@ -11,10 +10,11 @@ const SoloBattle = () => {
   const [selectedOpponentPokemon, setSelectedOpponentPokemon] = useState("");
   const [selectedOpponentPokemonId, setSelectedOpponentPokemonId] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isFullTeamDialogOpen, setIsFullTeamDialogOpen] = useState(false); 
   const navigate = useNavigate();
+  const [openSelectionModal, setOpenSelectionModal] = useState(false);
 
   const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
-
 
   const saveOpponentTeamToDatabase = async (team) => {
     try {
@@ -27,7 +27,7 @@ const SoloBattle = () => {
       });
 
       if (!response.ok) {
-        const errorMessage = await response.text(); // Capture server error response
+        const errorMessage = await response.text();
         throw new Error(`Failed to save opponent team: ${errorMessage}`);
       }
 
@@ -37,7 +37,6 @@ const SoloBattle = () => {
     }
   };
 
-  // Function to delete opponent team from the database
   const removeOpponentTeamFromDatabase = async () => {
     try {
       const response = await fetch(`${apiUrl}/opponent-team`, {
@@ -91,9 +90,9 @@ const SoloBattle = () => {
       updatedOpponentTeam[emptySlotIndex] = uniquePokemon;
       setOpponentTeam(updatedOpponentTeam);
       localStorage.setItem("opponentTeam", JSON.stringify(updatedOpponentTeam));
-      saveOpponentTeamToDatabase(updatedOpponentTeam); // Save to database
+      saveOpponentTeamToDatabase(updatedOpponentTeam);
     } else {
-      alert("Opponent's team is already full!");
+      setIsFullTeamDialogOpen(true); // Show full team modal
     }
   };
 
@@ -102,7 +101,7 @@ const SoloBattle = () => {
     updatedOpponentTeam[index] = null;
     setOpponentTeam(updatedOpponentTeam);
     localStorage.setItem("opponentTeam", JSON.stringify(updatedOpponentTeam));
-    saveOpponentTeamToDatabase(updatedOpponentTeam); 
+    saveOpponentTeamToDatabase(updatedOpponentTeam);
   };
 
   const handleContinue = () => {
@@ -117,7 +116,7 @@ const SoloBattle = () => {
   const handleClearOpponentTeam = () => {
     setOpponentTeam(Array(6).fill(null));
     localStorage.removeItem("opponentTeam");
-    removeOpponentTeamFromDatabase(); 
+    removeOpponentTeamFromDatabase();
   };
 
   return (
@@ -127,20 +126,19 @@ const SoloBattle = () => {
 
         <div>
           <h3>Opponent's Team:</h3>
-          <br />
           <div className="team-container">
             {opponentTeam.map((pokemon, index) => (
               <div key={index} className="pokemon-slot">
                 {pokemon ? (
-                    <>
-                      <img
-                        className="pokemon-image"
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-                        alt={pokemon.name}
-                      />
-                      <div>{pokemon.name}</div>
-                    </>
-                  ) : `Slot ${index + 1}`}
+                  <>
+                    <img
+                      className="pokemon-image"
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+                      alt={pokemon.name}
+                    />
+                    <div>{pokemon.name}</div>
+                  </>
+                ) : `Slot ${index + 1}`}
                 {pokemon && (
                   <button
                     className="remove-button"
@@ -156,46 +154,40 @@ const SoloBattle = () => {
         </div>
 
         <h3>Select Pokémon:</h3>
-        <Select.Root
-  value={selectedOpponentPokemon}
-  onValueChange={(value) => {
-    const selectedPokemon = pokemonList.find((p) => p.name === value);
-    setSelectedOpponentPokemon(value);
-    setSelectedOpponentPokemonId(selectedPokemon.url.split('/')[6]);
-  }}
->
-  <Select.Trigger className="pokemon-dropdown" aria-label="Pokémon">
-    <Select.Value placeholder="Select Pokémon" />
-    <Select.Icon>
-      <ChevronDownIcon />
-    </Select.Icon>
-  </Select.Trigger>
+        <button className="open-modal-button" onClick={() => setOpenSelectionModal(true)}>
+          Select Pokémon
+        </button>
 
-  <Select.Portal>
-    <Select.Content className="pokemon-dropdown">
-      <Select.ScrollUpButton />
-      <Select.Viewport>
-        {pokemonList.map((pokemon) => (
-          <Select.Item key={pokemon.name} value={pokemon.name} className="select-item">
-            <div className="select-item-content">
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`}
-                alt={pokemon.name}
-                className="select-item-image"
-              />
-              <Select.ItemText>{pokemon.name}</Select.ItemText>
-              <Select.ItemIndicator>
-                <CheckIcon />
-              </Select.ItemIndicator>
-            </div>
-          </Select.Item>
-        ))}
-      </Select.Viewport>
-      <Select.ScrollDownButton />
-    </Select.Content>
-  </Select.Portal>
-</Select.Root>
-        <br />
+        <Dialog.Root open={openSelectionModal} onOpenChange={setOpenSelectionModal}>
+          <Dialog.Portal>
+            <Dialog.Overlay className="dialog-overlay" />
+            <Dialog.Content className="dialog-content pokemon-modal">
+              <Dialog.Title className="dialog-title">Choose Your Pokémon</Dialog.Title>
+              <div className="pokemon-scroll-container">
+                <div className="pokemon-grid">
+                  {pokemonList.map((pokemon) => (
+                    <div
+                      key={pokemon.name}
+                      className="pokemon-select-card"
+                      onClick={() => {
+                        setSelectedOpponentPokemon(pokemon.name);
+                        setSelectedOpponentPokemonId(pokemon.url.split('/')[6]);
+                        setOpenSelectionModal(false);
+                      }}
+                    >
+                      <img
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`}
+                        alt={pokemon.name}
+                        className="pokemon-card-image"
+                      />
+                      <p>{pokemon.name}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
 
         <div className="button-group">
           <button className="add-to-team-button" onClick={handleAddOpponentPokemon}>
@@ -209,6 +201,20 @@ const SoloBattle = () => {
           </button>
         </div>
       </div>
+
+
+      <Dialog.Root open={isFullTeamDialogOpen} onOpenChange={setIsFullTeamDialogOpen}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="dialog-overlay full-team-overlay" />
+          <Dialog.Content className="dialog-content full-team-modal">
+            <Dialog.Title className="dialog-title full-team-title">Team Full</Dialog.Title>
+            <Dialog.Description className="dialog-description full-team-description">
+            You cannot add any more Pokémon. Perhaps leave some in the daycare?
+            </Dialog.Description>
+            <Dialog.Close className="dialog-close-button">Close</Dialog.Close>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
 
       <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <Dialog.Overlay className="dialog-overlay" />

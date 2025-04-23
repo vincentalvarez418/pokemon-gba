@@ -11,6 +11,10 @@ const Menu = () => {
   const [selectedPokemon, setSelectedPokemon] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
+  
+  const [openSelectionModal, setOpenSelectionModal] = useState(false);
+  const [openAlertModal, setOpenAlertModal] = useState(false);
+  const [openFullTeamModal, setOpenFullTeamModal] = useState(false); // Full Team Modal state
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -72,6 +76,8 @@ const Menu = () => {
         url: pokemon.url,
       };
       setTeam(updatedTeam);
+    } else {
+      setOpenFullTeamModal(true); // Open Full Team Modal if team is full
     }
   };
 
@@ -147,39 +153,36 @@ const Menu = () => {
           ))}
         </div>
 
-        <h3>Select Pokémon:</h3>
-        <Select.Root value={selectedPokemon} onValueChange={setSelectedPokemon}>
-  <Select.Trigger className="pokemon-dropdown" aria-label="Pokémon">
-    <Select.Value placeholder="Select Pokémon" />
-    <Select.Icon>
-      <ChevronDownIcon />
-    </Select.Icon>
-  </Select.Trigger>
-  <Select.Portal>
-    <Select.Content className="pokemon-dropdown">
-      <Select.ScrollUpButton />
-      <Select.Viewport>
-        {pokemonList.map((pokemon) => (
-          <Select.Item key={pokemon.name} value={pokemon.name} className="select-item">
-            <div className="select-item-content">
-              <img
-                src={pokemon.sprite}
-                alt={pokemon.name}
-                className="select-item-image"
-              />
-              <Select.ItemText>{pokemon.name}</Select.ItemText>
-              <Select.ItemIndicator>
-                <CheckIcon />
-              </Select.ItemIndicator>
-            </div>
-          </Select.Item>
-        ))}
-      </Select.Viewport>
-      <Select.ScrollDownButton />
-    </Select.Content>
-  </Select.Portal>
-</Select.Root>
+        <button className="open-modal-button" onClick={() => setOpenSelectionModal(true)}>
+          Select Pokémon
+        </button>
 
+        <Dialog.Root open={openSelectionModal} onOpenChange={setOpenSelectionModal}>
+          <Dialog.Portal>
+            <Dialog.Overlay className="dialog-overlay" />
+            <Dialog.Content className="dialog-content pokemon-modal">
+              <Dialog.Title className="dialog-title">Choose Your Pokémon</Dialog.Title>
+
+              <div className="pokemon-scroll-container">
+                <div className="pokemon-grid">
+                  {pokemonList.map((pokemon) => (
+                    <div
+                      key={pokemon.id}
+                      className="pokemon-select-card"
+                      onClick={() => {
+                        setSelectedPokemon(pokemon.name);
+                        setOpenSelectionModal(false);
+                      }}
+                    >
+                      <img src={pokemon.sprite} alt={pokemon.name} className="pokemon-card-image" />
+                      <p>{pokemon.name}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
 
         <div className="button-group">
           <button className="add-to-team-button" onClick={handleAddPokemonToTeam}>
@@ -191,7 +194,22 @@ const Menu = () => {
         </div>
       </div>
 
-      <Dialog.Root open={openDialog} onOpenChange={setOpenDialog}>
+      <Dialog.Root open={openFullTeamModal} onOpenChange={setOpenFullTeamModal}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="dialog-overlay" />
+          <Dialog.Content className="dialog-content">
+            <Dialog.Title className="dialog-title">Team Full</Dialog.Title>
+            <Dialog.Description className="dialog-description">
+              You cannot add any more Pokémon. Perhaps leave some in the daycare?
+            </Dialog.Description>
+            <Dialog.Close asChild>
+              <button className="dialog-close-button">Close</button>
+            </Dialog.Close>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+
+      <Dialog.Root open={openAlertModal} onOpenChange={setOpenAlertModal}>
         <Dialog.Portal>
           <Dialog.Overlay className="dialog-overlay" />
           <Dialog.Content className="dialog-content">

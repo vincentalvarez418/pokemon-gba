@@ -65,31 +65,41 @@
       "id": "1",
       "team": [
         {
-          "name": "hypno",
-          "id": 97,
-          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/97.png",
-          "url": "https://pokeapi.co/api/v2/pokemon/97/"
+          "name": "charmander",
+          "id": 4,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/4/"
         },
         {
-          "name": "zapdos",
-          "id": 145,
-          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/145.png",
-          "url": "https://pokeapi.co/api/v2/pokemon/145/"
+          "name": "sandslash",
+          "id": 28,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/28.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/28/"
         },
         {
-          "name": "dragonite",
-          "id": 149,
-          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
-          "url": "https://pokeapi.co/api/v2/pokemon/149/"
+          "name": "ivysaur",
+          "id": 2,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/2/"
         },
         {
-          "name": "mewtwo",
-          "id": 150,
-          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
-          "url": "https://pokeapi.co/api/v2/pokemon/150/"
+          "name": "bulbasaur",
+          "id": 1,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
         },
-        null,
-        null
+        {
+          "name": "bulbasaur",
+          "id": 1,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        },
+        {
+          "name": "venusaur",
+          "id": 3,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/3/"
+        }
       ]
     }
   ],
@@ -1239,15 +1249,35 @@
   "opponent-team": {
     "team": [
       {
+        "name": "blastoise",
+        "url": "https://pokeapi.co/api/v2/pokemon/9/",
+        "id": "9"
+      },
+      {
         "name": "bulbasaur",
         "url": "https://pokeapi.co/api/v2/pokemon/1/",
         "id": "1"
       },
-      null,
-      null,
-      null,
-      null,
-      null
+      {
+        "name": "bulbasaur",
+        "url": "https://pokeapi.co/api/v2/pokemon/1/",
+        "id": "1"
+      },
+      {
+        "name": "blastoise",
+        "url": "https://pokeapi.co/api/v2/pokemon/9/",
+        "id": "9"
+      },
+      {
+        "name": "bulbasaur",
+        "url": "https://pokeapi.co/api/v2/pokemon/1/",
+        "id": "1"
+      },
+      {
+        "name": "bulbasaur",
+        "url": "https://pokeapi.co/api/v2/pokemon/1/",
+        "id": "1"
+      }
     ]
   },
   "pings": [
@@ -1358,6 +1388,30 @@
     {
       "id": "fbc8",
       "time": "2025-04-23T05:01:57.776Z"
+    },
+    {
+      "id": "f851",
+      "time": "2025-04-23T05:12:16.173Z"
+    },
+    {
+      "id": "8244",
+      "time": "2025-04-23T05:12:21.171Z"
+    },
+    {
+      "id": "fd2b",
+      "time": "2025-04-23T10:32:25.983Z"
+    },
+    {
+      "id": "86b0",
+      "time": "2025-04-23T10:48:54.181Z"
+    },
+    {
+      "id": "3194",
+      "time": "2025-04-23T11:06:59.237Z"
+    },
+    {
+      "id": "183a",
+      "time": "2025-04-23T11:27:35.475Z"
     }
   ],
   "avatars": []
