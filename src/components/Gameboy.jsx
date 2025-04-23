@@ -157,7 +157,7 @@ const Gameboy = ({ altBackground, setAltBackground }) => {
 
 
 
-      <div className="gameboy-label">SINGLE CARTRIDGE EDITION</div>
+      <div className="gameboy-label">Pokémon GEN 1</div>
       <div className="speaker-grill">
         {[...Array(5)].map((_, i) => (
           <div key={i} className="grill-line" onClick={handleGrillLineClick} />

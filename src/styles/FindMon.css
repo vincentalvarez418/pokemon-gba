@@ -1,0 +1,145 @@
+.findmon-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+}
+
+.findmon {
+    background-color: white;
+    padding: 30px;
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin-top: 10px;
+    position: relative;
+    right: -180px;
+    text-transform: none !important;
+}
+
+.findmon h1, .findmon h2 {
+    font-size: 28px;
+    color: #ff61a6;
+    margin-bottom: 15px;
+    text-transform: none !important;
+}
+
+.findmon p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.findmon-cards {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.findmon-card {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.findmon-card img {
+    width: 100px;
+    height: 100px;
+}
+
+.findmon-card h3 {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+.play-again-container {
+    display: flex;
+    justify-content: center;
+    font-weight: bold !important;
+    margin-top: 20px;
+}
+
+.play-again {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #ff61a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.play-again:hover {
+    background-color: #ff3385;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    min-height: 50px;  
+}
+
+.correct {
+    background-color: #ffffff; 
+    color: white;
+}
+
+.incorrect {
+    background-color: #ffffff;
+    color: white;
+}
+
+.findmon h1 {
+    font-size: 36px; 
+    color: #ff61a6;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase; 
+}
+
+.findmon p {
+    font-size: 18px;
+    margin-bottom: 30px; 
+    color: #555;
+    text-align: center; 
+}
+
+
+@media (max-width: 1400px) {
+    .findmon-container {
+        display: none;
+    }
+    .findmon {
+        display: none;
+    }
+}
