@@ -1,56 +1,159 @@
 {
   "players": [
     {
-      "id": "6642bcf4-7697-4fb7-be56-3fd87748d887",
-      "name": "was"
+      "id": "34745262-d553-4714-af5a-7b661d6510ee",
+      "name": "comm",
+      "avatar": "Red"
     },
     {
-      "id": "6642bcf4-7697-4fb7-be56-3fd87748d887",
-      "name": "wise"
+      "id": "e92edb9a-aa24-45bc-ab06-f6202e6798a2",
+      "name": "Johnny"
     },
     {
-      "id": "6642bcf4-7697-4fb7-be56-3fd87748d887",
-      "name": "wasw"
+      "id": "9b1d460d-b524-49be-a9f0-5562c56a2fda",
+      "name": "Jison",
+      "avatar": "Red"
     },
     {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asdasd"
+      "id": "1adc63e1-b5bb-4a53-af8b-37179e12b49a",
+      "name": "red",
+      "avatar": "Blue"
     },
     {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asdasda"
+      "id": "aa9eeb83-e492-44b1-9482-a6661593464e",
+      "name": "3",
+      "avatar": "Irida"
     },
     {
-      "id": "7a427f67-5eb8-4870-9cfa-41c05225fb3b",
-      "name": "asdadsd"
+      "id": "9cc394c8-8c84-4520-831c-2da2f13b2f23",
+      "name": "asdas",
+      "avatar": "Irida"
     },
     {
-      "id": "885868fd-6f97-477d-a934-dc071e66b777",
-      "name": "asdad"
+      "id": "8b837157-7b28-49b2-bc47-f2ab21819587",
+      "name": "Jeff",
+      "avatar": "Blue"
     },
     {
-      "id": "3339e093-bb13-41fc-852c-14089f51fc3b",
-      "name": "sd"
+      "id": "a47db9a7-ce68-4c14-9b17-de77563fa3ee",
+      "name": "asd",
+      "avatar": "Blue"
     },
     {
-      "id": "fe218d9d-abe0-4885-81d4-edb0386165b7",
-      "name": "asd"
+      "id": "8e6418eb-55d8-4c90-8a0d-1140854f9a18",
+      "name": "Kenneth",
+      "avatar": "Green"
+    },
+    {
+      "id": "30e950d0-6c1f-4d4c-84d7-0825cc903180",
+      "name": "Larry",
+      "avatar": "Red"
+    },
+    {
+      "id": "dfb1d027-93b5-40d8-b650-091b3c85cd9b",
+      "name": "sasd",
+      "avatar": "Red"
+    },
+    {
+      "id": "cdb1e106-94c1-43a5-a9b3-903014af0774",
+      "name": "John",
+      "avatar": "Blue"
     }
   ],
   "team": [
     {
       "id": "1",
       "team": [
-        null,
-        null,
-        null,
-        null,
+        {
+          "name": "hypno",
+          "id": 97,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/97.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/97/"
+        },
+        {
+          "name": "zapdos",
+          "id": 145,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/145.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/145/"
+        },
+        {
+          "name": "dragonite",
+          "id": 149,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/149/"
+        },
+        {
+          "name": "mewtwo",
+          "id": 150,
+          "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+          "url": "https://pokeapi.co/api/v2/pokemon/150/"
+        },
         null,
         null
       ]
     }
   ],
-  "temporarybattlelog": [],
+  "temporarybattlelog": [
+    {
+      "id": "71cc",
+      "winner": "AI",
+      "winnerPokemon": "beedrill",
+      "faintedPokemon": "caterpie",
+      "winnerSlot": "enemySlot2",
+      "faintedSlot": "myTeamSlot2",
+      "timestamp": "2025-04-22T12:48:28.630Z"
+    },
+    {
+      "id": "b700",
+      "winner": "AI",
+      "winnerPokemon": "beedrill",
+      "faintedPokemon": "caterpie",
+      "winnerSlot": "enemySlot1",
+      "faintedSlot": "myTeamSlot2",
+      "playerName": "Jeff",
+      "timestamp": "2025-04-22T13:08:38.336Z"
+    },
+    {
+      "id": "6b2c",
+      "winner": "Player",
+      "winnerPokemon": "blastoise",
+      "faintedPokemon": "bulbasaur",
+      "winnerSlot": "myTeamSlot1",
+      "faintedSlot": "enemySlot1",
+      "playerName": "Kenneth",
+      "timestamp": "2025-04-23T03:35:18.531Z"
+    },
+    {
+      "id": "820e",
+      "winner": "Player",
+      "winnerPokemon": "pidgeotto",
+      "faintedPokemon": "bulbasaur",
+      "winnerSlot": "myTeamSlot1",
+      "faintedSlot": "enemySlot1",
+      "playerName": "Larry",
+      "timestamp": "2025-04-23T03:39:26.433Z"
+    },
+    {
+      "id": "d3d5",
+      "winner": "Player",
+      "winnerPokemon": "charizard",
+      "faintedPokemon": "bulbasaur",
+      "winnerSlot": "myTeamSlot1",
+      "faintedSlot": "enemySlot1",
+      "playerName": "John",
+      "timestamp": "2025-04-23T04:05:00.654Z"
+    },
+    {
+      "id": "c7bb",
+      "winner": "Player",
+      "winnerPokemon": "beedrill",
+      "faintedPokemon": "bulbasaur",
+      "winnerSlot": "myTeamSlot2",
+      "faintedSlot": "enemySlot2",
+      "playerName": "John",
+      "timestamp": "2025-04-23T04:05:20.802Z"
+    }
+  ],
   "battles": [
     {
       "id": "1",
@@ -294,6 +397,40 @@
     {
       "id": "becb",
       "battleId": "battle-ypcyf1v3w",
+      "status": "joined",
+      "ready": {
+        "leader": true,
+        "challenger": true
+      },
+      "matchready": {
+        "leader": false,
+        "challenger": false
+      },
+      "leaderPokemons": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "challengerPokemons": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "d73b",
+      "battleId": "battle-nfue8zn5y",
+      "status": "waiting"
+    },
+    {
+      "id": "9015",
+      "battleId": "battle-j9g205o74",
       "status": "joined",
       "ready": {
         "leader": true,
@@ -749,6 +886,32 @@
           "name": "pidgey"
         }
       ]
+    },
+    {
+      "id": "1ce5",
+      "battleId": "battle-j9g205o74",
+      "role": "Challenger",
+      "readyStatus": true,
+      "timestamp": "2025-04-23T04:07:39.053Z",
+      "selectedPokemons": [
+        {
+          "pokemonID": "3",
+          "name": "venusaur"
+        }
+      ]
+    },
+    {
+      "id": "f094",
+      "battleId": "battle-j9g205o74",
+      "role": "Gym Leader",
+      "readyStatus": true,
+      "timestamp": "2025-04-23T04:07:40.153Z",
+      "selectedPokemons": [
+        {
+          "pokemonID": "1",
+          "name": "bulbasaur"
+        }
+      ]
     }
   ],
   "battleResults": [
@@ -1048,18 +1211,154 @@
       "winnerPokemon": "victreebel",
       "winnerTrainer": "michaek",
       "timestamp": "2025-04-17T05:40:44.154Z"
+    },
+    {
+      "id": "6db0",
+      "battleId": "battle-j9g205o74",
+      "attacker": "venusaur",
+      "defender": "bulbasaur",
+      "attackerTrainer": "rey",
+      "defenderTrainer": "rey",
+      "winnerPokemon": "venusaur",
+      "winnerTrainer": "rey",
+      "timestamp": "2025-04-23T04:08:24.990Z"
+    },
+    {
+      "id": "dfa7",
+      "battleId": "battle-j9g205o74",
+      "attacker": "bulbasaur",
+      "defender": "venusaur",
+      "attackerTrainer": "rey",
+      "defenderTrainer": "rey",
+      "winnerPokemon": "venusaur",
+      "winnerTrainer": "rey",
+      "timestamp": "2025-04-23T04:08:30.021Z"
     }
   ],
-  "faintslots": [
-    
-  ]
-  ,
-    "opponent-team": {
-      "team": []
+  "faintslots": [],
+  "opponent-team": {
+    "team": [
+      {
+        "name": "bulbasaur",
+        "url": "https://pokeapi.co/api/v2/pokemon/1/",
+        "id": "1"
+      },
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "pings": [
+    {
+      "id": "c12f",
+      "time": "2025-04-22T11:14:16.588Z"
     },
-    "pings": []
-    ,
-    "avatars": []
-  
-  
+    {
+      "id": "472a",
+      "time": "2025-04-22T11:32:53.127Z"
+    },
+    {
+      "id": "39c1",
+      "time": "2025-04-22T11:33:14.876Z"
+    },
+    {
+      "id": "991c",
+      "time": "2025-04-22T12:10:03.604Z"
+    },
+    {
+      "id": "68c0",
+      "time": "2025-04-22T12:26:56.779Z"
+    },
+    {
+      "id": "b1bc",
+      "time": "2025-04-22T12:31:07.387Z"
+    },
+    {
+      "id": "a966",
+      "time": "2025-04-22T12:46:34.065Z"
+    },
+    {
+      "id": "7f19",
+      "time": "2025-04-22T13:04:01.686Z"
+    },
+    {
+      "id": "838d",
+      "time": "2025-04-22T13:27:54.473Z"
+    },
+    {
+      "id": "6d2a",
+      "time": "2025-04-22T13:43:01.961Z"
+    },
+    {
+      "id": "6f57",
+      "time": "2025-04-22T14:45:50.473Z"
+    },
+    {
+      "id": "2d8a",
+      "time": "2025-04-22T15:09:28.675Z"
+    },
+    {
+      "id": "a4a6",
+      "time": "2025-04-22T15:38:35.816Z"
+    },
+    {
+      "id": "cb1a",
+      "time": "2025-04-22T15:56:28.053Z"
+    },
+    {
+      "id": "ae9e",
+      "time": "2025-04-22T16:11:46.458Z"
+    },
+    {
+      "id": "f453",
+      "time": "2025-04-23T00:23:52.699Z"
+    },
+    {
+      "id": "afe0",
+      "time": "2025-04-23T01:04:39.121Z"
+    },
+    {
+      "id": "f833",
+      "time": "2025-04-23T01:29:04.398Z"
+    },
+    {
+      "id": "5f55",
+      "time": "2025-04-23T01:47:01.486Z"
+    },
+    {
+      "id": "021b",
+      "time": "2025-04-23T03:32:40.421Z"
+    },
+    {
+      "id": "841a",
+      "time": "2025-04-23T03:50:25.666Z"
+    },
+    {
+      "id": "5099",
+      "time": "2025-04-23T04:05:48.172Z"
+    },
+    {
+      "id": "3ebb",
+      "time": "2025-04-23T04:16:24.173Z"
+    },
+    {
+      "id": "e556",
+      "time": "2025-04-23T04:40:03.054Z"
+    },
+    {
+      "id": "8578",
+      "time": "2025-04-23T04:56:03.169Z"
+    },
+    {
+      "id": "00e8",
+      "time": "2025-04-23T04:56:06.556Z"
+    },
+    {
+      "id": "fbc8",
+      "time": "2025-04-23T05:01:57.776Z"
+    }
+  ],
+  "avatars": []
 }

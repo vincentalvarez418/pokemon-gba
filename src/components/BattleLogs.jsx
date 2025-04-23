@@ -9,6 +9,9 @@ const BattleLogs = () => {
   const [pokemonSprites, setPokemonSprites] = useState({});
   const navigate = useNavigate();
 
+  // Retrieve player name from localStorage or session
+  const playerName = localStorage.getItem("playerName");
+
   useEffect(() => {
     const fetchGen1PokemonSprites = async () => {
       const sprites = {};
@@ -31,13 +34,17 @@ const BattleLogs = () => {
       try {
         const response = await fetch(`${apiUrl}/temporarybattlelog`);
         const data = await response.json();
-        setBattleLogs(data || []);
+        
+        // Filter the battle logs based on the player's name
+        const filteredLogs = data.filter(log => log.playerName === playerName);
+        
+        setBattleLogs(filteredLogs || []);
       } catch (error) {
         console.error("Failed to fetch battle logs:", error);
       }
     };
     fetchBattleLogs();
-  }, []);
+  }, [playerName]); // Re-fetch when player name changes
 
   const goBack = () => {
     navigate("/lobby");

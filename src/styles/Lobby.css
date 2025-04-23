@@ -6,7 +6,6 @@
   background-color: #ffffff !important;
   border-radius: 12px;
   padding: 20px;
-  scrollbar-width: none;
 }
 
 .lobby2-lobby-screen {
@@ -15,29 +14,26 @@
   padding: 20px;
   width: 100%;
   max-width: 320px;
-  scrollbar-width: none;
   height: auto;
-}
-
-.lobby2-lobby-screen::-webkit-scrollbar {
-  display: none; 
 }
 
 .lobby2-menu-screen {
   width: 320px;
-  height: 200px;
+  height: 400px;
   background-color: #ffffff !important;
   border: 4px solid #444;
   border-radius: 12px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  overflow-y: scroll;
+  overflow-y: auto !important;
 }
 
-
+.lobby2-menu-screen::-webkit-scrollbar {
+  display: none !important;
+}
 
 .lobby2-menu-content {
   font-family: 'Press Start 2P', cursive;
@@ -51,15 +47,23 @@ h2 {
 
 .lobby2-button-group {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   gap: 8px;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
+  max-height: 300px; /* Enables scroll if content overflows */
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: none;
+}
+
+.lobby2-button-group::-webkit-scrollbar {
+  display: none;
 }
 
 .lobby2-battle-button {
-  width: 120px;
-  height: 70px; 
+  width: 180px;
+  height: 120px;
   padding: 10px;
   font-size: 16px;
   font-family: 'Press Start 2P', cursive;
@@ -71,6 +75,16 @@ h2 {
   text-transform: uppercase;
   font-weight: bold;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.lobby2-button-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
 }
 
 .lobby2-battle-button:hover {

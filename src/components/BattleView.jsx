@@ -69,11 +69,10 @@ const BattleView = () => {
       console.error("Pokemon name is undefined:", name);
       return null;
     }
-  
+
     const id = nameToIdMap[name.toLowerCase()];
     return id ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png` : null;
   };
-  
 
   const [battleLog, setBattleLog] = useState([]);
   const [faintedSlots, setFaintedSlots] = useState([]);
@@ -121,7 +120,6 @@ const BattleView = () => {
     fetchFaintedSlots();
   }, []);
 
-
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
@@ -141,13 +139,16 @@ const BattleView = () => {
   }, [faintedSlots]);
 
   useEffect(() => {
+    if (!labeledOpponentTeam || labeledOpponentTeam.length === 0 || labeledOpponentTeam.every(pokemon => !pokemon)) {
+      navigate("/solo-battle"); 
+    }
+
     if (battleLog.length > 0) {
       const playerWins = battleLog.filter((entry) => entry.winner === "Player").length;
       const aiWins = battleLog.filter((entry) => entry.winner === "AI").length;
       setPlayerWinCount(playerWins);
       setAiWinCount(aiWins);
     }
-
 
     const logSlots = (team, battleStatus, teamName) => {
       const availableSlots = team.filter((pokemon) => {
@@ -160,11 +161,10 @@ const BattleView = () => {
       console.log(`${teamName} - Available Slots: ${availableSlots}, Fainted Slots: ${faintedSlotsCount}`);
     };
 
-
     logSlots(playerTeam, playerBattleStatus, "Player");
     logSlots(labeledOpponentTeam, opponentBattleStatus, "AI");
 
-  }, [battleLog, playerBattleStatus, opponentBattleStatus, playerTeam, faintedSlots, labeledOpponentTeam]);
+  }, [battleLog, playerBattleStatus, opponentBattleStatus, playerTeam, faintedSlots, labeledOpponentTeam, navigate]);
 
   const handlePokemonClick = (team, index, isPlayer) => {
     const selected = team[index];

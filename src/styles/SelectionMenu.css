@@ -123,10 +123,11 @@
 
 .pokemon-dropdown {
   width: 100%;
-  font-size: 10px;
+  font-size: 15px;
   padding: 4px;
   border-radius: 4px;
   background-color: #eee;
+  color: black;
   font-family: 'Press Start 2P', cursive;
   text-transform: capitalize;
   max-height: 80px;
@@ -144,8 +145,8 @@
 
 
 select option {
-  height: 5px;
-  font-size: 8px;
+  height: 14px;
+  font-size: 10px !important;
   padding: 2px 4px;
 }
 
@@ -253,3 +254,42 @@ body:has(.dialog-content) {
   color: #000 !important;
 }
 
+.select-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.select-item-content {
+  display: flex;
+  align-items: center;
+  color: #000;
+  gap: 8px;
+}
+
+.select-item-image {
+  width: 32px;
+  height: 32px;
+}
+
+.select-item[aria-selected="true"] {
+  background-color: #0096bb;
+  color: white;
+}
+
+.select-item:hover {
+  background-color: #e1e1e1;
+  color: black;
+}
+
+
+.pokemon-dropdown:hover,
+.pokemon-dropdown:focus,
+.pokemon-dropdown:focus-visible {
+  background-color: #eee !important; 
+  color: black !important; 
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #222 !important;
+}

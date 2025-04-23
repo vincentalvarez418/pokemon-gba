@@ -144,6 +144,8 @@ const Pokebattle = () => {
   const logToDatabase = async (winner, winnerPokemon, faintedPokemon, winnerSlot, faintedSlot) => {
     if (isLogged) return;
   
+    const playerName = localStorage.getItem("playerName"); // Get player name
+  
     try {
       let winnerPokemonSave = winner === "Draw" ? `${playerPokemon.name}, ${opponentPokemon.name}` : winnerPokemon;
       let faintedPokemonSave = winner === "Draw" ? `${playerPokemon.name}, ${opponentPokemon.name}` : faintedPokemon;
@@ -159,6 +161,7 @@ const Pokebattle = () => {
           faintedPokemon: faintedPokemonSave,
           winnerSlot: winnerSlotSave,
           faintedSlot: faintedSlotSave,
+          playerName,  
           timestamp: new Date().toISOString(),
         }),
       });
