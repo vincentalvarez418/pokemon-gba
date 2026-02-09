@@ -12,3 +12,6 @@ It includes:
 📷 QR Code Battles
 
 💾 Retro UI built with CSS and React
+
+
+pokemonsgen1.netlify.app
